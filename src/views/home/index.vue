@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { Button, DatePicker, QRCode, Radio } from 'ant-design-vue';
+import { Button, Card, DatePicker, QRCode, Radio } from 'ant-design-vue';
 </script>
 
 <template>
-  <div class="text-lg">hssshh</div>
-  <Button type="primary">按钮</Button>
+  <Card style="height: 100vh">
+    <div class="text-lg">hssshh</div>
+    <Button type="primary">按钮</Button>
 
-  <DatePicker />
+    <DatePicker />
 
-  <QRCode value="" />
+    <QRCode value="" />
 
-  <Radio />
+    <Radio />
+  </Card>
 </template>
 
 <style lang="scss" scoped></style>

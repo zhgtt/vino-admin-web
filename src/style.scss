@@ -3,6 +3,51 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --nav-menu-color: rgba(0, 0, 0, 0.65);
+  --nav-menu-color-selected: rgba(0, 0, 0, 0.95);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-block: 0;
+}
+
+// 自定义 antd 样式
+.vino-sider-menu {
+  flex: 1 1 0%; // NOTE flex-grow，flex-shrink，flex-basis 的缩写（参考 https://www.runoob.com/cssref/css3-pr-flex.html）
+  overflow: hidden auto;
+  .ant-menu,
+  .ant-menu-inline {
+    border: none !important;
+    background-color: transparent !important;
+  }
+  .ant-menu-item,
+  .ant-menu-submenu-title {
+    border-radius: 4px;
+    color: var(--nav-menu-color);
+  }
+  .ant-menu-item {
+    margin-bottom: 8px;
+  }
+  .ant-menu-item:active,
+  .ant-menu-item-selected,
+  .ant-menu-submenu-title:active,
+  .ant-menu-submenu-selected > .ant-menu-submenu-title {
+    background-color: rgba(0, 0, 0, 0.04) !important;
+    color: var(--nav-menu-color-selected);
+  }
+  .ant-menu-submenu-selected > .ant-menu-submenu-title {
+    background-color: transparent !important;
+  }
+}
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
