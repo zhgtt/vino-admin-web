@@ -1,18 +1,15 @@
-# Vue 3 + TypeScript + Vite
+# Vino-admin-web
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+这只是一个平台管理系统的架子，借鉴了多个优秀的开源平台，就是在不断借鉴与学习中一点一点开发。。。毕竟开发者只是个小小的前端。。
 
-## Recommended IDE Setup
+该项目以 vue3 + vite + typescript + pinia 为基础进行搭建的，组件库采用的是 antd 4.x 版本，样式上采用 antd 的 ProComponents 组件库。。
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+暂时做不到 ProComponents 那么优秀的组件库，所以尽量完成一些小功能。。
 
-## Type Support For `.vue` Imports in TS
+# 优秀资源
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+- [ProComponents 文档（react）](https://procomponents.ant.design/)
+- [ant-design-vue 文档](https://ant.design/components/overview-cn)
+- [优秀的开源项目：vue-pure-admin](https://github.com/pure-admin/vue-pure-admin)
+- [优秀的开源项目：naive-ui-admin](https://github.com/jekip/naive-ui-admin)
+- [优秀的开源项目：vue3-element-admin](https://gitee.com/youlaiorg/vue3-element-admin)
