@@ -27,14 +27,14 @@ const hasComponent = (route: AuthRoute.Route) => Boolean(route.component);
 /**
  * 批量转换路由组件（一般是第一层路由）
  */
-export const transformAuthRouteToVueRoutes = (routes: AuthRoute.Route[]) => {
-  return routes.map((route) => transformAuthRouteToVueRoute(route)).flat(1);
+export const __transformAuthRouteToVueRoutes = (routes: AuthRoute.Route[]) => {
+  return routes.map((route) => _transformAuthRouteToVueRoute(route)).flat(1);
 };
 
 /**
  * 转换单个路由组件
  */
-export const transformAuthRouteToVueRoute = (item: AuthRoute.Route) => {
+export const _transformAuthRouteToVueRoute = (item: AuthRoute.Route) => {
   const resultRoute: RouteRecordRaw[] = [];
 
   const itemRoute = { ...item } as RouteRecordRaw;
@@ -59,4 +59,4 @@ export const transformAuthRouteToVueRoute = (item: AuthRoute.Route) => {
 };
 
 // 对路由进行排序
-export const sortRoutes = (routes: AuthRoute.Route[]) => {};
+export const _sortRoutes = (routes: AuthRoute.Route[]) => {};

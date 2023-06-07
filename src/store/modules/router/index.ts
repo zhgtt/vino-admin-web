@@ -2,9 +2,9 @@ import { defineStore } from 'pinia';
 
 import { router, staticRoutes } from '@/router';
 import {
-  filterAuthRoutesByUserPermission,
-  transformAuthRouteToMenu,
-  transformAuthRouteToVueRoutes,
+  _filterAuthRoutesByUserPermission,
+  _transformAuthRouteToMenu,
+  __transformAuthRouteToVueRoutes,
 } from '@/utils';
 
 interface RouteState {
@@ -39,11 +39,11 @@ export const useRouteState = defineStore('route-store', {
     handleAuthRoute(routes: AuthRoute.Route[]) {
       // console.log('routes: ', routes);
       // 将处理后的路由添加到菜单中
-      this.menus = transformAuthRouteToMenu(routes);
+      this.menus = _transformAuthRouteToMenu(routes);
       console.log('this.menus: ', this.menus);
 
       // 将处理后的路由添加到 router 中
-      const vueRoutes = transformAuthRouteToVueRoutes(routes);
+      const vueRoutes = __transformAuthRouteToVueRoutes(routes);
       console.log('vueRoutes: ', vueRoutes);
       vueRoutes.forEach((route) => {
         router.addRoute(route);
@@ -59,7 +59,7 @@ export const useRouteState = defineStore('route-store', {
      * 初始化静态路由 
      */
     async initStaticRoute() {
-      const routes = filterAuthRoutesByUserPermission(staticRoutes);
+      const routes = _filterAuthRoutesByUserPermission(staticRoutes);
       this.handleAuthRoute(routes);
 
       // 改变状态

@@ -9,7 +9,7 @@ import { useRoute } from 'vue-router';
 
 import { useRouterPush } from '@/hooks';
 import { useRouteState } from '@/store';
-import { getActiveKeyPathsOfMenus } from '@/utils';
+import { _findTreeNodePath } from '@/utils';
 
 interface Props {
   mode: MenuProps['mode'];
@@ -45,9 +45,9 @@ watch(
   () => route.name,
   () => {
     const activekey = activekeys.value[0];
-    const defaultOpenKeys = getActiveKeyPathsOfMenus(menus.value, (item) => item.key === activekey);
+    const defaultOpenKeys = _findTreeNodePath(menus.value, (item) => item.key === activekey);
     console.log('defaultOpenKeys: ', defaultOpenKeys);
-    openKeys.value = defaultOpenKeys;
+    openKeys.value = defaultOpenKeys as string[];
   },
   { immediate: true }
 );
@@ -95,28 +95,32 @@ const options: MenuProps = {
     width: 100%;
   }
   .ant-menu-item,
-  .ant-menu-overflow-item,
+  .ant-menu-overflow-item,  // 顶部菜单容器
   .ant-menu-submenu-title {
     border-radius: 4px !important;
     color: var(--nav-menu-color);
   }
   @include menuitem-selected;
+  /* 选中的菜单组 */
   .ant-menu-submenu-selected > .ant-menu-submenu-title {
     background-color: transparent !important;
   }
 }
 
+/* 侧边栏的菜单 */
 .vino-sider-inline-menu {
   overflow: hidden auto;
   .ant-menu-item {
     margin-bottom: 8px;
   }
   .ant-menu-submenu-title:active,
+  .ant-menu-submenu-title:hover,
   .ant-menu-inline-collapsed .ant-menu-submenu-selected > .ant-menu-submenu-title {
     @include common-style;
   }
 }
 
+/* 顶部导航栏的菜单 */
 .vino-sider-horizontal-menu {
   flex: 1 1 0%;
   min-width: 0;
@@ -133,6 +137,7 @@ const options: MenuProps = {
   }
 }
 
+/* 折叠后弹出的菜单样式 */
 .vino-sider-submenu-popup {
   @include menuitem-selected;
 }

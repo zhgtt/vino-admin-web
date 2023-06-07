@@ -4,7 +4,7 @@
  * @功能 modules 是一个对象，文件系统中的每个 module 都代表一级菜单
  */
 
-// import { sortRoutes } from '@/router/utils';
+// import { _sortRoutes } from '@/router/utils';
 
 const modules = import.meta.glob<AuthRoute.RouteModule>('./**/*.ts', {
   eager: true, // 直接引入所有模块（静态导入）
@@ -19,7 +19,7 @@ const routeModuleList = Object.keys(modules).reduce((preList: AuthRoute.Route[],
 }, []);
 
 // 排序
-// sortRoutes(routeModuleList);
+// _sortRoutes(routeModuleList);
 
 console.log('routeModuleList: ', routeModuleList);
 

@@ -18,3 +18,13 @@ h3,
 h4 {
   margin-block: 0;
 }
+
+/** 顶部进度条 nprogress 样式 **/
+#nprogress {
+  .bar {
+    background-color: transparent !important;
+  }
+  .peg {
+    box-shadow: 0 0 10px #1677ff, 0 0 5px #1677ff !important;
+  }
+}

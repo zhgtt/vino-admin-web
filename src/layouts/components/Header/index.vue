@@ -18,7 +18,10 @@ const { mode, menuPosition } = layout;
       <div :class="['vino-header-main', 'flex h-full']">
         <Logo />
         <!-- menuPosition = 'mix' 时，只会显示一级菜单 -->
-        <VMenu v-if="mode === 'mix' && menuPosition === 'mix'" mode="horizontal" />
+        <VMenu
+          v-if="mode === 'top' || (mode === 'mix' && menuPosition === 'mix')"
+          mode="horizontal"
+        />
         <div class="vino-header-main-right"></div>
       </div>
     </div>

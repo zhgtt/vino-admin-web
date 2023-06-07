@@ -4,11 +4,13 @@
 import type { Router } from 'vue-router';
 
 import { useTitle } from '@/hooks';
+import { close, start } from '@/router/plugins/nprogress';
 import { createPermissionGuard } from './permission';
 
 export const createRouterGuards = (router: Router) => {
   router.beforeEach(async (to, from, next) => {
     // TODO 开始加载进度条
+    start();
 
     // 页面跳转权限处理
     await createPermissionGuard(to, from, next);
@@ -19,5 +21,6 @@ export const createRouterGuards = (router: Router) => {
     useTitle(to.meta.title as string);
 
     // TODO 结束加载进度条
+    close();
   });
 };

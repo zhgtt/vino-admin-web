@@ -21,7 +21,7 @@ const iconRender = (icon: AuthRoute.RouteMeta['icon']) => {
 /**
  * @description 路由转成菜单
  */
-export const transformAuthRouteToMenu = (routes: AuthRoute.Route[]) => {
+export const _transformAuthRouteToMenu = (routes: AuthRoute.Route[]) => {
   const globalMenu: App.GlobalMenuOption[] = [];
 
   routes.forEach((route) => {
@@ -30,7 +30,7 @@ export const transformAuthRouteToMenu = (routes: AuthRoute.Route[]) => {
     let menuChildren: App.GlobalMenuOption[] | undefined; // 没有子路由时，将 children 设置为 undefined
 
     if (route.children && route.children.length > 0) {
-      menuChildren = transformAuthRouteToMenu(route.children);
+      menuChildren = _transformAuthRouteToMenu(route.children);
     }
     const menuItem: App.GlobalMenuOption = {
       key: name,
@@ -53,20 +53,3 @@ export const transformAuthRouteToMenu = (routes: AuthRoute.Route[]) => {
 /**
  * 获取当前路由所在的菜单 key 组成的数组
  */
-export const getActiveKeyPathsOfMenus = (
-  menus: App.GlobalMenuOption[],
-  func: (item: App.GlobalMenuOption) => boolean, // 接收 一个判断条件 作为参数
-  path: string[] = []
-) => {
-  if (!menus) return [];
-  for (const item of menus) {
-    path.push(item.key);
-    if (func(item)) return path;
-    if (item.children) {
-      const res = getActiveKeyPathsOfMenus(item.children, func, path) as string[];
-      if (res.length) return res;
-    }
-    path.pop(); // 避免数组存在之前的缓存数据
-  }
-  return [];
-};
