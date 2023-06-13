@@ -23,6 +23,7 @@ export interface Props {
   style?: CSSProperties;
   twoToneColor?: string; // 双色图标的色值，仅适用于 antd 的双色图标
   spin?: boolean; // 是否有旋转动画，仅适用于 antd 的图标
+  class?: string;
   // ...
 }
 
@@ -54,6 +55,7 @@ if (!name) {
       :style="style"
       :twoToneColor="twoToneColor"
       :spin="spin"
+      :class="class"
     />
   </template>
 

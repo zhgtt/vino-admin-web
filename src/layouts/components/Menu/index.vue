@@ -2,7 +2,7 @@
 /**
  * @component 菜单组件
  */
-import type { ItemType, MenuProps } from 'ant-design-vue';
+import type { MenuProps } from 'ant-design-vue';
 import { Menu } from 'ant-design-vue';
 import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
@@ -10,6 +10,7 @@ import { useRoute } from 'vue-router';
 import { useRouterPush } from '@/hooks';
 import { useRouteState } from '@/store';
 import { _findTreeNodePath } from '@/utils';
+import MenuItem from './MenuItem.vue';
 
 interface Props {
   mode: MenuProps['mode'];
@@ -23,21 +24,23 @@ const { routerPush } = useRouterPush();
 const { mode } = defineProps<Props>();
 
 const menus = computed(() => routeStore.menus); // 渲染菜单
-const activekeys = computed(() => [route.name] as string[]); // 选中的菜单
+const activekeys = computed(() => [route.meta?.activeMenu || route.name] as string[]); // 选中的菜单
 const openKeys = ref<string[]>([]); // 展开的菜单组
 
-/** 菜单选中事件 */
-const onSelect: MenuProps['onSelect'] = ({ item }) => {
+/** 菜单点击事件 */
+const onClick: MenuProps['onClick'] = ({ item }) => {
+  // console.log('item: ', item);
   const menuItem = item as App.GlobalMenuOption;
   routerPush(menuItem.routePath);
 };
 
 /** 菜单组展开/折叠事件 */
 const onOpenChange: MenuProps['onOpenChange'] = (keys) => {
-  console.log('keys: ', keys);
+  // console.log('keys: ', keys);
   // const lastOpenkey = keys.find((item) => openKeys.value.indexOf(item) === -1);
   // console.log('lastOpenkey: ', lastOpenkey);
-  openKeys.value = keys.slice(-1) as string[];
+  // openKeys.value = keys.slice(-1) as string[];
+  openKeys.value = keys as string[];
 };
 
 /** 监听路由的 name，默认展开当前菜单的父级菜单 */
@@ -45,7 +48,7 @@ watch(
   () => route.name,
   () => {
     const activekey = activekeys.value[0];
-    const defaultOpenKeys = _findTreeNodePath(menus.value, (item) => item.key === activekey);
+    const defaultOpenKeys = _findTreeNodePath(menus.value, (item) => item.key === activekey, 'key');
     console.log('defaultOpenKeys: ', defaultOpenKeys);
     openKeys.value = defaultOpenKeys as string[];
   },
@@ -62,12 +65,13 @@ const options: MenuProps = {
   <div :class="`vino-sider-${mode}-menu`">
     <Menu
       v-bind="{ ...options }"
-      :items="(menus as ItemType[])"
       v-model:open-keys="openKeys"
       v-model:selected-keys="activekeys"
-      @select="onSelect"
+      @click="onClick"
       @open-change="onOpenChange"
-    />
+    >
+      <MenuItem :menus="menus" />
+    </Menu>
   </div>
 </template>
 

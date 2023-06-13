@@ -6,13 +6,14 @@ const routes: AuthRoute.Route[] = [
     redirect: '/dashboard/workbench',
     meta: {
       title: '仪表盘',
-      icon: 'DashboardOutlined'
+      icon: 'DashboardOutlined',
+      order: 0
     },
     children: [
       {
         name: 'dashboard_workbench',
         path: '/dashboard/workbench',
-        component: () => import('@/views/dashboard/workbench/index.vue'),
+        component: 'self',
         meta: {
           title: '工作台',
         },

@@ -20,11 +20,7 @@ const { mode, title, logo } = layout;
   <!-- logo 的布局随 mode 的模式不同而变化 -->
   <div
     v-if="mode === 'side'"
-    :class="[
-      'vino-sider-logo',
-      'flex justify-between items-center',
-      collapsed && 'vino-sider-logo-collapsed',
-    ]"
+    :class="['vino-sider-logo', 'flex justify-between items-center', collapsed && 'vino-sider-logo-collapsed']"
   >
     <a href="/" class="vino-logo">
       <img v-bind="{ ...logo }" width="22" height="22" />

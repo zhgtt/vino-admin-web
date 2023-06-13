@@ -11,18 +11,18 @@ const { mode } = layout;
 </script>
 
 <template>
-  <div :class="['vino-layout-container', 'relative w-full flex flex-col bg-transparent']">
-    <Header v-if="mode !== 'side'" />
+  <RouterView #default="{ Component, route }">
+    <div :class="['vino-layout-container', 'relative w-full flex flex-col bg-transparent']">
+      <Header v-if="mode !== 'side'" />
 
-    <RouterView #default="{ Component, route }">
       <LayoutContent>
         <div :class="['vino-page-container']">
           <!-- NOTE 动态渲染组件：is 表示组件，key 表示唯一标识 -->
           <component :is="Component" :key="route.fullPath" />
         </div>
       </LayoutContent>
-    </RouterView>
-  </div>
+    </div>
+  </RouterView>
 </template>
 
 <style lang="scss">

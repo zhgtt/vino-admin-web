@@ -1,5 +1,5 @@
 /**
- * @description 处理路由页面的权限
+ * @description 每次路由跳转时的处理逻辑（外链、权限路由等）
  */
 
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router';
@@ -13,9 +13,9 @@ const createDynamicRouteGuard = async (
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
-  const route = useRouteState();
+  const route = useRouteState(); // 引入 route store 全局的状态管理
 
-  // 初始化权限路由，如果未初始化动态权限路由，需走到 store 中
+  // 初始化权限路由，如果未初始化动态权限路由，需走到 store 中（通常是第一次页面渲染或页面刷新）
   if (!route.isInitAuthRoute) {
     // 未登录的情况下直接跳转至登录页，登陆成功后再加载权限路由
     // if (!isLogin) {
@@ -28,9 +28,10 @@ const createDynamicRouteGuard = async (
     next({ path: to.fullPath, replace: true });
   }
 
+  console.log('to.name: ', to.name);
+
   // 权限路由已经加载，但仍然未找到路由，则重定向到 404
   if (to.name === routeName('not-found')) {
-    // console.log('to.name: ', to.name);
     next({ name: routeName('404'), replace: true });
     return false;
   }

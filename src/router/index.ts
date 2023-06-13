@@ -1,14 +1,14 @@
 import type { App } from 'vue';
-import type { RouteRecordRaw } from 'vue-router';
 import { createRouter, createWebHistory } from 'vue-router';
 
+import { _transformAuthRouteToVueRoutes } from '@/utils';
 import { createRouterGuards } from './guards';
 import { constantRoutes } from './routes';
 
 // 创建路由实例
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: constantRoutes as RouteRecordRaw[],
+  routes: _transformAuthRouteToVueRoutes(constantRoutes), // 转换固定的路由
   strict: false, // 是否禁止地址尾部斜杠
   scrollBehavior: () => ({ left: 0, top: 0 }), // 页面跳转时控制滚动条的位置，可以返回一个 promise 来延迟滚动
 });

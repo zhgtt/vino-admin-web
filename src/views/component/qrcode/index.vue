@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import ProContainer from '@/components/ProContainer/index.vue';
 </script>
 
 <template>

@@ -9,7 +9,7 @@ import { createPermissionGuard } from './permission';
 
 export const createRouterGuards = (router: Router) => {
   router.beforeEach(async (to, from, next) => {
-    // TODO 开始加载进度条
+    // 开始加载进度条
     start();
 
     // 页面跳转权限处理
@@ -20,7 +20,7 @@ export const createRouterGuards = (router: Router) => {
     // 设置 document 标签页标题
     useTitle(to.meta.title as string);
 
-    // TODO 结束加载进度条
+    // 结束加载进度条
     close();
   });
 };

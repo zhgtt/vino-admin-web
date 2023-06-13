@@ -16,32 +16,32 @@ export const constantRoutes: AuthRoute.Route[] = [
   {
     name: 'login',
     path: '/login',
-    component: () => import('@/views/_builtin/login/index.vue'),
-    meta: { title: '登录' },
+    component: 'self',
+    meta: { title: '登录', singleLayout: 'blank' },
   },
   {
     name: '404',
     path: '/404',
-    component: () => import('@/views/_builtin/404/index.vue'),
-    meta: { title: '页面丢失了' },
+    component: 'self',
+    meta: { title: '页面丢失了', singleLayout: 'blank' },
   },
   {
     name: '403',
     path: '/403',
-    component: () => import('@/views/_builtin/403/index.vue'),
-    meta: { title: '无权限' },
+    component: 'self',
+    meta: { title: '无权限', singleLayout: 'blank' },
   },
   {
     name: '500',
     path: '/500',
-    component: () => import('@/views/_builtin/500/index.vue'),
-    meta: { title: '服务器出错啦' },
+    component: 'self',
+    meta: { title: '服务器出错啦', singleLayout: 'blank' },
   },
   /** 捕获所有 not-found 页面 */
   {
     name: 'not-found',
     path: '/:pathMatch(.*)*', // 正则匹配
-    component: () => import('@/views/_builtin/404/index.vue'),
-    meta: { title: '未找到页面' },
+    component: 'self',
+    meta: { title: '未找到页面', singleLayout: 'blank' },
   },
 ];

@@ -80,8 +80,7 @@ const siderMaskingWidth = computed(() => (collapsed.value ? 64 : asideWidth)); /
     transition: color 0.3s, transform 0.3s;
     background-color: #ffffff;
     color: rgba(0, 0, 0, 0.25);
-    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05), 0 1px 4px -1px rgba(25, 15, 15, 0.07),
-      0 0 1px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05), 0 1px 4px -1px rgba(25, 15, 15, 0.07), 0 0 1px 0 rgba(0, 0, 0, 0.08);
 
     &:hover {
       color: rgba(0, 0, 0, 0.65);
