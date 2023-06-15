@@ -17,7 +17,7 @@ const iconRender = (icon: AuthRoute.RouteMeta['icon']) => {
 /**
  * 路由转成菜单
  */
-export const _transformAuthRouteToMenu = (routes: AuthRoute.Route[]) => {
+export const transformAuthRouteToMenu = (routes: AuthRoute.Route[]) => {
   const globalMenu: App.GlobalMenuOption[] = [];
 
   routes.forEach((route) => {
@@ -26,7 +26,7 @@ export const _transformAuthRouteToMenu = (routes: AuthRoute.Route[]) => {
     let menuChildren: App.GlobalMenuOption[] | undefined; // 没有子路由时，将 children 设置为 undefined
 
     if (route.children && route.children.length > 0) {
-      menuChildren = _transformAuthRouteToMenu(route.children);
+      menuChildren = transformAuthRouteToMenu(route.children);
     }
     const menuItem: App.GlobalMenuOption = {
       key: name,

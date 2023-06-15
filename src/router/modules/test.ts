@@ -4,7 +4,7 @@ const routes: AuthRoute.Route = {
   component: 'basic',
   meta: {
     title: '多级菜单',
-    order: 3,
+    order: 4,
   },
   children: [
     {

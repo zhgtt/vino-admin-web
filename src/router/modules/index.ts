@@ -4,7 +4,7 @@
  * modules 是一个对象，文件系统中的每个 module 都代表一级菜单
  */
 
-import { _sortRoutes } from '@/utils';
+import { sortRoutes } from '@/utils/router';
 
 const modules = import.meta.glob<AuthRoute.RouteModule>('./**/*.ts', {
   eager: true, // 直接引入所有模块（静态导入）
@@ -24,7 +24,7 @@ const routeModuleList = Object.keys(modules)
 /**
  * 对路由进行排序
  */
-_sortRoutes(routeModuleList);
+sortRoutes(routeModuleList);
 
 console.log('routeModuleList: ', routeModuleList);
 

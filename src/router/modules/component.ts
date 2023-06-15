@@ -3,7 +3,7 @@ const routes: AuthRoute.Route[] = [
     name: 'component',
     path: '/component',
     component: 'basic',
-    redirect: '/components/button',
+    redirect: '/component/button',
     meta: {
       title: '组件示例',
       icon: 'LikeOutlined',

@@ -27,20 +27,9 @@ const { mode } = layout;
 
 <style lang="scss">
 .vino-layout-container {
-  .ant-layout-content {
-    /* padding-block: 24px;
-    padding-inline: 40px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    background: transparent; */
-  }
-
   .vino-page-container {
     padding-inline: 40px;
     padding-block-start: 12px;
-    padding-block-end: 24px;
   }
 }
 </style>

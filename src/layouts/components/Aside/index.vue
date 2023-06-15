@@ -4,16 +4,23 @@
  */
 
 import { LayoutSider } from 'ant-design-vue';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 import { LeftOutlined } from '@/components/Svg';
+import { Logo, VMenu } from '@/layouts/components';
 import { layout } from '@/settings';
-import { Logo, VMenu } from '../index';
+import { useAppStore } from '@/store';
 
-const { asideWidth, mode } = layout;
+const { aside, mode } = layout;
+
+const app = useAppStore();
 
 const collapsed = ref<boolean>(false); // 是否收起侧边栏
-const siderMaskingWidth = computed(() => (collapsed.value ? 64 : asideWidth)); // 侧边栏底层蒙版
+const siderMaskingWidth = computed(() => (collapsed.value ? 64 : aside?.width)); // 侧边栏底层蒙版
+
+watch(collapsed, (newVal) => {
+  app.setSiderCollapse(newVal);
+});
 </script>
 
 <template>
@@ -28,7 +35,7 @@ const siderMaskingWidth = computed(() => (collapsed.value ? 64 : asideWidth)); /
     }"
   />
   <LayoutSider
-    :width="asideWidth"
+    :width="aside?.width"
     :class="['vino-layout-sider', `vino-layout-${mode}`, '!fixed']"
     collapsible
     v-model:collapsed="collapsed"
@@ -36,7 +43,7 @@ const siderMaskingWidth = computed(() => (collapsed.value ? 64 : asideWidth)); /
     collapsed-width="64"
   >
     <!-- logo -->
-    <Logo v-if="mode === 'side'" :collapsed="collapsed" />
+    <Logo v-if="mode === 'side'" />
     <!-- 菜单 -->
     <VMenu mode="inline" />
     <!-- 侧边栏底部内容 -->

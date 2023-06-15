@@ -1,0 +1,26 @@
+[
+  {
+    "title": "常逛",
+    "desc": "杭州市较知名的 UI 设计语言",
+    "children": [
+      {
+        "title": "语雀文档",
+        "desc": "个人文档、学习记录",
+        "icon": "https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg",
+        "url": "https://www.yuque.com/"
+      },
+      {
+        "icon": "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg",
+        "title": "Ant Design",
+        "desc": "杭州市较知名的 UI 设计语言",
+        "url": "https://ant.design"
+      },
+      {
+        "icon": "https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg",
+        "title": "Pro Components",
+        "desc": "专业级 UI 组件库",
+        "url": "https://procomponents.ant.design/"
+      }
+    ]
+  }
+]

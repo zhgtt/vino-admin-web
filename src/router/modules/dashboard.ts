@@ -3,7 +3,6 @@ const routes: AuthRoute.Route[] = [
     name: 'dashboard',
     path: '/dashboard',
     component: 'basic',
-    redirect: '/dashboard/workbench',
     meta: {
       title: '仪表盘',
       icon: 'DashboardOutlined',

@@ -7,6 +7,7 @@ const routes: AuthRoute.Route[] = [
       title: '关于',
       icon: 'DashboardOutlined',
       singleLayout: 'basic',
+      order: 3
     },
   },
 ];

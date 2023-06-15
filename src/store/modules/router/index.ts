@@ -1,7 +1,14 @@
+/**
+ * 全局管理 router 的状态
+ */
 import { defineStore } from 'pinia';
 
 import { router, staticRoutes } from '@/router';
-import { _filterAuthRoutesByUserPermission, _transformAuthRouteToMenu, _transformAuthRouteToVueRoutes } from '@/utils';
+import {
+  filterAuthRoutesByUserPermission,
+  transformAuthRouteToMenu,
+  transformAuthRouteToVueRoutes,
+} from '@/utils/router';
 
 interface RouteState {
   /**
@@ -16,7 +23,7 @@ interface RouteState {
   menus: App.GlobalMenuOption[];
 }
 
-export const useRouteState = defineStore('route-store', {
+export const useRouteStore = defineStore('route-store', {
   state: (): RouteState => ({
     authRouteMode: import.meta.env.VITE_AUTH_ROUTE_MODE,
     isInitAuthRoute: false,
@@ -35,11 +42,11 @@ export const useRouteState = defineStore('route-store', {
     handleAuthRoute(routes: AuthRoute.Route[]) {
       // console.log('routes: ', routes);
       // 将处理后的路由添加到菜单中
-      this.menus = _transformAuthRouteToMenu(routes);
+      this.menus = transformAuthRouteToMenu(routes);
       console.log('this.menus: ', this.menus);
 
       // 将处理后的路由添加到 router 中（再触发 router 钩子守卫函数）
-      const vueRoutes = _transformAuthRouteToVueRoutes(routes);
+      const vueRoutes = transformAuthRouteToVueRoutes(routes);
       console.log('vueRoutes: ', vueRoutes);
       vueRoutes.forEach((route) => {
         router.addRoute(route);
@@ -55,7 +62,7 @@ export const useRouteState = defineStore('route-store', {
      * 初始化静态路由
      */
     async initStaticRoute() {
-      const routes = _filterAuthRoutesByUserPermission(staticRoutes); // 先根据用户权限过滤路由
+      const routes = filterAuthRoutesByUserPermission(staticRoutes); // 先根据用户权限过滤路由
       this.handleAuthRoute(routes); // 再处理理由
 
       // 改变状态

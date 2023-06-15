@@ -23,8 +23,8 @@ const hasHref = (item: AuthRoute.Route) => Boolean(item.meta?.href);
  * 批量转换路由组件，将路由中的 component 转换成 vue 组件（递归处理路由）
  * 转换的是 modules 里面的路由及后端返回的动态路由，不包含定义的固定路由
  */
-export const _transformAuthRouteToVueRoutes = (routes: AuthRoute.Route[]) => {
-  return routes.map((route) => _transformAuthRouteToVueRoute(route)).flat(1); // flat 将二维数组铺平
+export const transformAuthRouteToVueRoutes = (routes: AuthRoute.Route[]) => {
+  return routes.map((route) => transformAuthRouteToVueRoute(route)).flat(1); // flat 将二维数组铺平
 };
 
 /**
@@ -32,7 +32,7 @@ export const _transformAuthRouteToVueRoutes = (routes: AuthRoute.Route[]) => {
  */
 type ComponentAction = Record<AuthRoute.RouteComponentType, () => void>;
 
-export const _transformAuthRouteToVueRoute = (item: AuthRoute.Route) => {
+export const transformAuthRouteToVueRoute = (item: AuthRoute.Route) => {
   const resultRoute: RouteRecordRaw[] = [];
 
   const itemRoute = { ...item } as RouteRecordRaw;
@@ -103,9 +103,15 @@ export const _transformAuthRouteToVueRoute = (item: AuthRoute.Route) => {
 
   /** 判断是否含有子组件，将子组件递归处理相同的逻辑 */
   if (hasChildren(item)) {
-    const children = (item.children as AuthRoute.Route[]).map((child) => _transformAuthRouteToVueRoute(child)).flat(1);
+    const children = (item.children as AuthRoute.Route[]).map((child) => transformAuthRouteToVueRoute(child)).flat(1);
 
-    // TODO 缺少多级路由、路由重定向的逻辑、
+    // 如果没有定义 redirect，将多级路由下的第一个路由（不能为多级路由）作为重定向路由，以免在导致页面跳转失败的问题（也可以在路由中自定义）
+    const redirectPath = item.redirect || children.find((item) => !item.meta?.multi)?.path || '/';
+
+    if (redirectPath === '/') {
+      window.console.error('该多级路由下没有有效的子路径', item);
+    }
+
     if (item.component === 'multi') {
       // 多级路由，将子路由提取出来变成同级
       resultRoute.push(...children);
@@ -113,6 +119,7 @@ export const _transformAuthRouteToVueRoute = (item: AuthRoute.Route) => {
     } else {
       itemRoute.children = children;
     }
+    itemRoute.redirect = redirectPath; // 赋值重定向路由
   }
 
   resultRoute.push(itemRoute);
@@ -124,11 +131,11 @@ export const _transformAuthRouteToVueRoute = (item: AuthRoute.Route) => {
  * 对路由进行排序
  * NOTE next - 下一个数据，pre - 上一个数据，返回值 > 0，next 在 pre 的后面，反之 next 在 pre 的前面
  */
-export const _sortRoutes = (routes: AuthRoute.Route[]) => {
+export const sortRoutes = (routes: AuthRoute.Route[]) => {
   return routes
     .sort((next, pre) => Number(next.meta?.order) - Number(pre.meta?.order))
     .map((item) => {
-      if (item.children) _sortRoutes(item.children);
+      if (item.children) sortRoutes(item.children);
       return item;
     });
 };

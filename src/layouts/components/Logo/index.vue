@@ -4,37 +4,36 @@
  */
 import {} from 'vue';
 
-import { AppsIcon } from '@/components/Svg';
 import { layout } from '@/settings';
+import { useAppStore } from '@/store';
+import AppsMenu from './AppsMenu.vue';
 
-interface Props {
-  collapsed?: boolean;
-}
+// interface Props {}
 
-const { collapsed } = defineProps<Props>();
+const app = useAppStore();
 
-const { mode, title, logo } = layout;
+// const {} = defineProps<Props>();
+
+const { mode, title, logo, appList = [] } = layout;
 </script>
 
 <template>
   <!-- logo 的布局随 mode 的模式不同而变化 -->
+  <!-- logo 在侧边栏 -->
   <div
     v-if="mode === 'side'"
-    :class="['vino-sider-logo', 'flex justify-between items-center', collapsed && 'vino-sider-logo-collapsed']"
+    :class="['vino-sider-logo', 'flex justify-between items-center', app.siderCollapse && 'vino-sider-logo-collapsed']"
   >
     <a href="/" class="vino-logo">
       <img v-bind="{ ...logo }" width="22" height="22" />
-      <h1 v-if="!collapsed">{{ title }}</h1>
+      <h1 v-if="!app.siderCollapse">{{ title }}</h1>
     </a>
-    <span class="apps-icon">
-      <AppsIcon />
-    </span>
+    <AppsMenu v-if="appList.length > 0" :style="app.siderCollapse ? { fontSize: '16px', marginBlockEnd: '8px' } : {}" />
   </div>
 
+  <!-- logo 在顶部导航栏 -->
   <div v-else :class="['vino-header-logo', 'flex items-center']">
-    <span class="apps-icon">
-      <AppsIcon />
-    </span>
+    <AppsMenu v-if="appList.length > 0" :style="{ marginInline: '-8px 16px' }" />
     <a href="/" class="vino-logo">
       <img v-bind="{ ...logo }" width="22" height="22" />
       <h1>{{ title }}</h1>
@@ -64,25 +63,6 @@ const { mode, title, logo } = layout;
   }
 }
 
-/* TODO */
-.apps-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding-inline: 4px;
-  padding-block: 0;
-  font-size: 14px;
-  line-height: 14px;
-  height: 28px;
-  width: 28px;
-  cursor: pointer;
-  color: var(--nav-menu-color);
-  &:hover {
-    color: #000;
-    background-color: rgba(0, 0, 0, 0.04);
-  }
-}
-
 .vino-sider-logo {
   padding-inline: 12px;
   padding-block: 16px;
@@ -93,18 +73,9 @@ const { mode, title, logo } = layout;
 .vino-sider-logo-collapsed {
   flex-direction: column-reverse;
   padding: 12px;
-  .apps-icon {
-    margin-block-end: 8px;
-    font-size: 16px;
-    transition: font-size 0.2s ease-in-out, color 0.2s ease-in-out;
-  }
 }
 
 .vino-header-logo {
-  .apps-icon {
-    margin-inline-end: 16px;
-    margin-inline-start: -8px;
-  }
   .vino-logo {
     position: relative;
     display: flex;

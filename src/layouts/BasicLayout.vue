@@ -1,4 +1,16 @@
 <script setup lang="ts">
+/**
+ * NOTE 整体布局方式
+ * Container - 内容; Header - 顶部导航; Aside - 侧边栏; Menu - 菜单; Logo - logo和跨站点导航菜单（只有 Aside 和 Container 是独立的）
+ * Container 中包含 Header
+ * Header 包含 Menu 和 Logo
+ * Aside 包含 Menu 和 Logo
+ *
+ * top 模式下：只有 Container
+ * side 和 mix 模式下：既有 Container，又有 Aside
+ *
+ * mix 模式下：Logo 只会显示在 Header 中，Aside 中不能有 Logo
+ */
 import { Layout } from 'ant-design-vue';
 
 import { layout } from '@/settings';

@@ -5,7 +5,7 @@
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router';
 
 import { routeName } from '@/router';
-import { useRouteState } from '@/store';
+import { useRouteStore } from '@/store';
 
 // 动态路由
 const createDynamicRouteGuard = async (
@@ -13,7 +13,7 @@ const createDynamicRouteGuard = async (
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
-  const route = useRouteState(); // 引入 route store 全局的状态管理
+  const route = useRouteStore(); // 引入 route store 全局的状态管理
 
   // 初始化权限路由，如果未初始化动态权限路由，需走到 store 中（通常是第一次页面渲染或页面刷新）
   if (!route.isInitAuthRoute) {

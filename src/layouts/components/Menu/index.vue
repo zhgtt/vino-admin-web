@@ -8,7 +8,7 @@ import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { useRouterPush } from '@/hooks';
-import { useRouteState } from '@/store';
+import { useRouteStore } from '@/store';
 import { _findTreeNodePath } from '@/utils';
 import MenuItem from './MenuItem.vue';
 
@@ -18,7 +18,8 @@ interface Props {
 
 const route = useRoute();
 console.log('route: ', route);
-const routeStore = useRouteState();
+const routeStore = useRouteStore();
+
 const { routerPush } = useRouterPush();
 
 const { mode } = defineProps<Props>();
@@ -34,7 +35,7 @@ const onClick: MenuProps['onClick'] = ({ item }) => {
   routerPush(menuItem.routePath);
 };
 
-/** 菜单组展开/折叠事件 */
+/** TODO 菜单组展开/折叠事件，缺少只展示当前路由菜单的逻辑 */
 const onOpenChange: MenuProps['onOpenChange'] = (keys) => {
   // console.log('keys: ', keys);
   // const lastOpenkey = keys.find((item) => openKeys.value.indexOf(item) === -1);
