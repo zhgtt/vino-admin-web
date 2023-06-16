@@ -14,31 +14,38 @@ const app = useAppStore();
 
 // const {} = defineProps<Props>();
 
-const { mode, title, logo, appList = [] } = layout;
+const { mode, title, logo } = layout;
 </script>
 
 <template>
   <!-- logo 的布局随 mode 的模式不同而变化 -->
   <!-- logo 在侧边栏 -->
-  <div
-    v-if="mode === 'side'"
-    :class="['vino-sider-logo', 'flex justify-between items-center', app.siderCollapse && 'vino-sider-logo-collapsed']"
-  >
-    <a href="/" class="vino-logo">
-      <img v-bind="{ ...logo }" width="22" height="22" />
-      <h1 v-if="!app.siderCollapse">{{ title }}</h1>
-    </a>
-    <AppsMenu v-if="appList.length > 0" :style="app.siderCollapse ? { fontSize: '16px', marginBlockEnd: '8px' } : {}" />
-  </div>
+  <template v-if="mode === 'side'">
+    <div
+      :class="[
+        'vino-sider-logo',
+        'flex justify-between items-center',
+        app.siderCollapse && 'vino-sider-logo-collapsed',
+      ]"
+    >
+      <a href="/" class="vino-logo">
+        <img v-bind="{ ...logo }" width="22" height="22" />
+        <h1 v-if="!app.siderCollapse">{{ title }}</h1>
+      </a>
+      <AppsMenu :style="app.siderCollapse ? { fontSize: '16px', marginBlockEnd: '8px' } : {}" />
+    </div>
+  </template>
 
   <!-- logo 在顶部导航栏 -->
-  <div v-else :class="['vino-header-logo', 'flex items-center']">
-    <AppsMenu v-if="appList.length > 0" :style="{ marginInline: '-8px 16px' }" />
-    <a href="/" class="vino-logo">
-      <img v-bind="{ ...logo }" width="22" height="22" />
-      <h1>{{ title }}</h1>
-    </a>
-  </div>
+  <template v-else>
+    <div :class="['vino-header-logo', 'flex items-center']">
+      <AppsMenu :style="{ marginInline: '-8px 16px' }" />
+      <a href="/" class="vino-logo">
+        <img v-bind="{ ...logo }" width="22" height="22" />
+        <h1>{{ title }}</h1>
+      </a>
+    </div>
+  </template>
 </template>
 
 <style lang="scss">

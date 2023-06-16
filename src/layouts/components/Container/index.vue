@@ -5,15 +5,15 @@
 import { LayoutContent } from 'ant-design-vue';
 
 import { Header } from '@/layouts/components';
-import { layout } from '@/settings';
+// import { layout } from '@/settings';
 
-const { mode } = layout;
+// const { mode } = layout;
 </script>
 
 <template>
   <RouterView #default="{ Component, route }">
     <div :class="['vino-layout-container', 'relative w-full flex flex-col bg-transparent']">
-      <Header v-if="mode !== 'side'" />
+      <Header />
 
       <LayoutContent>
         <div :class="['vino-page-container']">

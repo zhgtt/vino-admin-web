@@ -16,7 +16,17 @@ const { aside, mode } = layout;
 const app = useAppStore();
 
 const collapsed = ref<boolean>(false); // 是否收起侧边栏
+
 const siderMaskingWidth = computed(() => (collapsed.value ? 64 : aside?.width)); // 侧边栏底层蒙版
+const siderStyle = computed(() => {
+  let height: number;
+  if (mode === 'mix') {
+    height = app.isShowlAlert ? 106 : 56;
+  } else {
+    height = app.isShowlAlert ? 48 : 0;
+  }
+  return { height: `calc(100% - ${height}px)`, insetBlockStart: `${height}px` };
+});
 
 watch(collapsed, (newVal) => {
   app.setSiderCollapse(newVal);
@@ -36,11 +46,12 @@ watch(collapsed, (newVal) => {
   />
   <LayoutSider
     :width="aside?.width"
-    :class="['vino-layout-sider', `vino-layout-${mode}`, '!fixed']"
+    :class="['vino-layout-sider', '!fixed']"
     collapsible
     v-model:collapsed="collapsed"
     :trigger="null"
     collapsed-width="64"
+    :style="siderStyle"
   >
     <!-- logo -->
     <Logo v-if="mode === 'side'" />
@@ -99,14 +110,5 @@ watch(collapsed, (newVal) => {
       transition: transform 0.3s;
     }
   }
-}
-
-.vino-layout-mix {
-  height: calc(100% - 56px);
-  inset-block-start: 56px; // 上外边距
-}
-
-.vino-layout-side {
-  height: 100%;
 }
 </style>

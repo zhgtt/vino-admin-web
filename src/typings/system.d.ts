@@ -59,18 +59,27 @@ declare namespace App {
     alt?: string; // 辅助说明
   };
 
+  /** 全局公告栏设置 */
+  type AlertOptions = {
+    background?: string; // 背景颜色
+    message: string | (() => JSX.Element); // 自定义 message 内容
+    isClosed?: boolean; // 是否可以关闭
+    isShowIcon?: boolean?; // 是否显示图标
+  };
+
   /** 页面布局配置项 */
   type GlobalLayoutSettings = {
     title: string; // 标题
     appList?: GlobalAppsMenu[]; // 跨站点导航
-    mode: LayoutMode; // 布局模式
+    mode?: LayoutMode; // 布局模式
     menu?: MenuOptions; // 菜单设置
     aside?: AsideOptions; // 侧边栏设置
-    logo: LogoOptions;
+    logo?: LogoOptions;
   };
 
   /** 系统配置项 */
   type GlobalSystemSettings = {
     iconFontUrl?: string; // iconfot script 地址
+    alert?: AlertOptions;
   };
 }

@@ -2,30 +2,55 @@
 /**
  * @component 顶部导航栏
  */
-import { Logo, VMenu } from '@/layouts/components';
+import { computed } from 'vue';
+
+import { Logo, VAlert, VMenu } from '@/layouts/components';
 import { layout } from '@/settings';
+import { useAppStore } from '@/store';
 
 const { mode } = layout;
+
+const app = useAppStore();
+
+const headerStyle = computed(() => {
+  const height = app.isShowlAlert ? 106 : 56;
+  return { height: `${height}px`, lineHeight: `${height}px` };
+});
 </script>
 
 <template>
-  <header :style="{ height: '56px', lineHeight: '56px' }" class="bg-transparent z-[19]" />
-  <header :class="['vino-layout-header', 'fixed w-full']">
-    <div class="relative w-full h-full bg-transparent">
-      <div :class="['vino-header-main', 'flex h-full']">
-        <Logo />
-        <!-- TODO menuPosition = 'mix' 时，只会显示一级菜单 -->
-        <VMenu v-if="mode === 'top'" mode="horizontal" />
-        <div class="vino-header-main-right"></div>
+  <!-- 侧边栏的 header，只有 alert -->
+  <template v-if="mode === 'side'">
+    <template v-if="app.isShowlAlert">
+      <header class="bg-transparent z-[19]" :style="{ height: '48px', lineHeight: '48px' }" />
+      <header class="fixed w-full z-[100] left-0" :style="{ height: '48px', lineHeight: '48px' }">
+        <!-- 顶部 alert -->
+        <VAlert />
+      </header>
+    </template>
+  </template>
+
+  <!-- 顶部导航栏的 header -->
+  <template v-else>
+    <header :style="headerStyle" class="bg-transparent z-[19]" />
+    <header :class="['vino-layout-header', 'fixed w-full']" :style="headerStyle">
+      <VAlert v-if="app.isShowlAlert" />
+
+      <!-- 顶部导航栏 -->
+      <div class="relative w-full h-full bg-transparent" :style="{ height: '56px', lineHeight: '56px' }">
+        <div :class="['vino-header-main', 'flex h-full']">
+          <Logo />
+          <!-- TODO menuPosition = 'mix' 时，只会显示一级菜单 -->
+          <VMenu v-if="mode === 'top'" mode="horizontal" />
+          <div class="vino-header-main-right"></div>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
+  </template>
 </template>
 
 <style lang="scss">
 .vino-layout-header {
-  height: 56px;
-  line-height: 56px;
   z-index: 100;
   inset-block-start: 0;
   inset-inline-end: 0;

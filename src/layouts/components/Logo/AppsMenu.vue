@@ -6,7 +6,7 @@ import { PropType, defineComponent, ref } from 'vue';
 import { AppsIcon } from '@/components/Svg';
 import { layout } from '@/settings';
 
-const { appList } = layout;
+const { appList = [] } = layout;
 
 interface Props {
   style?: CSSProperties;
@@ -50,6 +50,7 @@ const AppItemRender = defineComponent({
     v-model:open="actived"
     placement="bottomLeft"
     destroyTooltipOnHide
+    v-if="appList.length > 0"
   >
     <div
       :class="[
