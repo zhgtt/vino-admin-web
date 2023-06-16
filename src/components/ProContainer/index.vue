@@ -4,7 +4,7 @@
  */
 import type { BreadcrumbProps, PageHeaderProps } from 'ant-design-vue';
 import { Card, PageHeader } from 'ant-design-vue';
-import { computed, useSlots } from 'vue';
+import { computed, useSlots, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { layout } from '@/settings';
@@ -22,7 +22,7 @@ type Props = Omit<PageHeaderProps, 'breadcrumb' | 'backIcon'> & {
   footerBar?: () => JSX.Element; // 底部操作栏
 };
 
-const { aside } = layout;
+const { aside, mode } = layout;
 
 const route = useRoute();
 const routeStore = useRouteStore();
@@ -66,6 +66,20 @@ const pageHeaderOptions = computed<PageHeaderProps>(() =>
 
 /** PageHeader 组件下的所有 slot 插槽 */
 const pageHeaderSlots = ['title', 'subTitle', 'extra', 'tags', 'footer'];
+
+const footerBarWidth = computed(() => {
+  if (mode === 'top') return `100%`;
+  return `calc(100% - ${app.siderCollapse ? 64 : aside?.width}px)`;
+});
+
+/** 监听页面中有没有 footerbar */
+watch(
+  () => !!useSlots()?.['footerBar'],
+  (value) => {
+    app.setFooterBarStatus(value);
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
@@ -85,10 +99,9 @@ const pageHeaderSlots = ['title', 'subTitle', 'extra', 'tags', 'footer'];
 
   <!-- footer-bar 底部操作栏 -->
   <template v-if="!!useSlots()['footerBar']">
-    <div class="h-16 mt-6"></div>
     <div
       :class="['vino-page-footer-bar', 'fixed z-[99] flex items-center box-border']"
-      :style="{ width: `calc(100% - ${app.siderCollapse ? 64 : aside?.width}px)` }"
+      :style="{ width: footerBarWidth }"
     >
       <div class="footer-bar-left"></div>
       <div class="footer-bar-right">

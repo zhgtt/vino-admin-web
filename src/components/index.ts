@@ -1,5 +1,6 @@
 /**
  * 这里注册全局组件（只对部分组件进行全局注册）
+ * 全局组件的 ts 类型提示可在 components.d.ts 文件中查看
  */
 import type { App } from 'vue';
 

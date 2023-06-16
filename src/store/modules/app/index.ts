@@ -14,22 +14,29 @@ interface AppState {
   // globalSettings
   /** 顶部全局告示 alert 展示状态 */
   isShowlAlert: boolean;
+  /** 页面级别的 footerBar 展示状态 */
+  hasFooterBar: boolean;
 }
 
 export const useAppStore = defineStore('app-store', {
   state: (): AppState => ({
     siderCollapse: false,
     isShowlAlert: !!alert?.message,
+    hasFooterBar: false,
   }),
   actions: {
     /** 设置侧边栏折叠的状态 */
     setSiderCollapse(collapse: boolean) {
       this.siderCollapse = collapse;
     },
-    /** 设置告示栏显影的状态 */
+    /** 设置告示栏显隐的状态 */
     setAlertStatus(status: boolean) {
-      console.log('status: ', status);
       this.isShowlAlert = status;
+    },
+    /** 设置 footerBar 显隐的状态 */
+    setFooterBarStatus(status: boolean) {
+      console.log('status: ', status);
+      this.hasFooterBar = status;
     },
   },
 });

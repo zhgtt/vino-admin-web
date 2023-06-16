@@ -57,8 +57,8 @@ watch(collapsed, (newVal) => {
     <Logo v-if="mode === 'side'" />
     <!-- 菜单 -->
     <VMenu mode="inline" />
-    <!-- 侧边栏底部内容 -->
-    <div>sider-fooer</div>
+    <!-- TODO 侧边栏操作区域内容 -->
+    
     <!-- 侧栏收起/展开的按钮 -->
     <div
       :class="[

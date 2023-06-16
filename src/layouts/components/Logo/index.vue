@@ -29,7 +29,7 @@ const { mode, title, logo } = layout;
       ]"
     >
       <a href="/" class="vino-logo">
-        <img v-bind="{ ...logo }" width="22" height="22" />
+        <img v-bind="{ ...logo }" />
         <h1 v-if="!app.siderCollapse">{{ title }}</h1>
       </a>
       <AppsMenu :style="app.siderCollapse ? { fontSize: '16px', marginBlockEnd: '8px' } : {}" />
@@ -41,7 +41,7 @@ const { mode, title, logo } = layout;
     <div :class="['vino-header-logo', 'flex items-center']">
       <AppsMenu :style="{ marginInline: '-8px 16px' }" />
       <a href="/" class="vino-logo">
-        <img v-bind="{ ...logo }" width="22" height="22" />
+        <img v-bind="{ ...logo }" />
         <h1>{{ title }}</h1>
       </a>
     </div>
@@ -56,17 +56,19 @@ const { mode, title, logo } = layout;
   font-size: 22px;
   min-height: 22px;
 
+  > img {
+    width: 24px;
+    height: 24px;
+  }
+
   > h1 {
     display: inline-block;
-    height: 22px;
     margin-block: 0;
     margin-inline-end: 0;
     margin-inline-start: 6px; // 等同于 margin-left
     color: rgba(0, 0, 0, 0.88);
     font-weight: 600;
-    font-size: 16px;
-    line-height: 22px;
-    vertical-align: middle;
+    font-size: 18px;
   }
 }
 

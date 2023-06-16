@@ -93,7 +93,6 @@ const AppItemRender = defineComponent({
   padding-inline: 4px;
   padding-block: 0;
   font-size: 14px;
-  line-height: 14px;
   height: 28px;
   width: 28px;
   color: var(--nav-menu-color);

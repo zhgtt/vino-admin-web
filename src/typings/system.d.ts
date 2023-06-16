@@ -75,6 +75,11 @@ declare namespace App {
     menu?: MenuOptions; // 菜单设置
     aside?: AsideOptions; // 侧边栏设置
     logo?: LogoOptions;
+    // actionsRender?: any;  // 操作按钮
+    // avatarProps?: any; // 头像
+    footer?: {
+      copyright?: string; // 版权文字说明
+    };
   };
 
   /** 系统配置项 */

@@ -5,12 +5,17 @@ import type { Router } from 'vue-router';
 
 import { useTitle } from '@/hooks';
 import { close, start } from '@/router/plugins/nprogress';
+import { useAppStore } from '@/store';
 import { createPermissionGuard } from './permission';
 
 export const createRouterGuards = (router: Router) => {
   router.beforeEach(async (to, from, next) => {
     // 开始加载进度条
     start();
+
+    /** TODO 切换路由时，清除一些全局状态 */
+    const app = useAppStore();
+    app.setFooterBarStatus(false);
 
     // 页面跳转权限处理
     await createPermissionGuard(to, from, next);
