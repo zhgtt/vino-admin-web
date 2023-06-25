@@ -16,6 +16,8 @@ interface AppState {
   isShowlAlert: boolean;
   /** 页面级别的 footerBar 展示状态 */
   hasFooterBar: boolean;
+  /** 是否显示侧边栏 */
+  isShowAside: boolean;
 }
 
 export const useAppStore = defineStore('app-store', {
@@ -23,6 +25,7 @@ export const useAppStore = defineStore('app-store', {
     siderCollapse: false,
     isShowlAlert: !!alert?.message,
     hasFooterBar: false,
+    isShowAside: true,
   }),
   actions: {
     /** 设置侧边栏折叠的状态 */
@@ -35,8 +38,11 @@ export const useAppStore = defineStore('app-store', {
     },
     /** 设置 footerBar 显隐的状态 */
     setFooterBarStatus(status: boolean) {
-      console.log('status: ', status);
       this.hasFooterBar = status;
+    },
+    /** 设置 Aside 侧边栏的显隐的状态 */
+    setAsideStatus(status: boolean) {
+      this.isShowAside = status;
     },
   },
 });

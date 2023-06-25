@@ -44,7 +44,3 @@ export const transformAuthRouteToMenu = (routes: AuthRoute.Route[]) => {
 
   return globalMenu;
 };
-
-/**
- *
- */

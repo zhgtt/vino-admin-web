@@ -21,11 +21,12 @@ const ChildMenuItem = defineComponent({
   setup(props, _context) {
     const { key, label, children = [], icon, hide, ...rest } = props.menuData;
 
+    // TODO 后期添加标签样式
     const LabelRender = () => <span>{label}</span>;
 
     return () =>
       children.length ? (
-        <SubMenu key={key} title={<LabelRender />} icon={icon && icon()} popupClassName="vino-sider-submenu-popup">
+        <SubMenu key={key} title={<LabelRender />} icon={icon && icon()} popupClassName="vino-submenu-popup">
           {children.map((child) => (
             <ChildMenuItem key={child.key} menuData={child} />
           ))}

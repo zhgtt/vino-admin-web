@@ -4,7 +4,7 @@
  */
 import { computed } from 'vue';
 
-import { Logo, VAlert, VMenu } from '@/layouts/components';
+import { BoardAlert, Logo, NavMenu, UserAvatar } from '@/layouts/components';
 import { layout } from '@/settings';
 import { useAppStore } from '@/store';
 
@@ -25,7 +25,7 @@ const headerStyle = computed(() => {
       <header class="bg-transparent z-[19]" :style="{ height: '48px', lineHeight: '48px' }" />
       <header class="fixed w-full z-[100] left-0" :style="{ height: '48px', lineHeight: '48px' }">
         <!-- 顶部 alert -->
-        <VAlert />
+        <BoardAlert />
       </header>
     </template>
   </template>
@@ -34,15 +34,21 @@ const headerStyle = computed(() => {
   <template v-else>
     <header :style="headerStyle" class="bg-transparent z-[19]" />
     <header :class="['vino-layout-header', 'fixed w-full']" :style="headerStyle">
-      <VAlert v-if="app.isShowlAlert" />
+      <!-- 顶部 alert -->
+      <BoardAlert v-if="app.isShowlAlert" />
 
       <!-- 顶部导航栏 -->
       <div class="relative w-full h-full bg-transparent" :style="{ height: '56px', lineHeight: '56px' }">
         <div :class="['vino-header-main', 'flex h-full']">
+          <!-- logo -->
           <Logo />
-          <!-- TODO menuPosition = 'mix' 时，只会显示一级菜单 -->
-          <VMenu v-if="mode === 'top'" mode="horizontal" />
-          <div class="vino-header-main-right"></div>
+          <!-- 菜单 -->
+          <NavMenu menu-mode="header" />
+          <!-- TODO 右侧操作区域 -->
+          <!-- TODO 用户头像 -->
+          <div class="vino-header-main-right">
+            <UserAvatar />
+          </div>
         </div>
       </div>
     </header>

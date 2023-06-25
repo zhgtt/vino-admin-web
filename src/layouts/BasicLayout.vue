@@ -14,9 +14,12 @@
 import { Layout } from 'ant-design-vue';
 
 import { layout } from '@/settings';
+import { useAppStore } from '@/store';
 import { Aside, Container } from './components';
 
 const { mode } = layout;
+
+const app = useAppStore();
 </script>
 
 <template>
@@ -42,13 +45,10 @@ const { mode } = layout;
     </div>
     <!-- 布局 -->
     <Layout class="min-h-full">
-      <Aside v-if="mode !== 'top'" />
+      <Aside v-if="app.isShowAside && mode !== 'top'" />
       <Container />
     </Layout>
   </div>
-
-  <!-- footer bar 底部操作（固定位置） -->
-  <div :class="['vino-footer-bar']"></div>
 </template>
 
 <style lang="scss">
@@ -57,7 +57,7 @@ const { mode } = layout;
     background: linear-gradient(#ffffff, #f5f5f5 28%);
     pointer-events: none; // NOTE 是否对指针事件做出反应，比如 鼠标移到 a 标签处，左下角会有链接显示
     inset-block-start: 0; // NOTE 等同于 left/right 属性
-    inset-inline-start: 0; // NOTE等同于 top/bottom 属性
+    inset-inline-start: 0; // NOTE 等同于 top/bottom 属性
     z-index: 0;
   }
 }

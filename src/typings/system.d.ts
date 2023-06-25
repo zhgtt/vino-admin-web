@@ -50,7 +50,7 @@ declare namespace App {
 
   /** 菜单设置 */
   type MenuOptions = {
-    position?: 'side' | 'top'; // 菜单位置，只在 mix 模式下生效，为 top 时，只展示第一层菜单
+    position?: 'left' | 'top'; // 菜单位置，只在 mix 模式下生效，为 top 时，只展示第一层菜单，默认为 left
   };
 
   /** logo 设置 */
@@ -71,9 +71,9 @@ declare namespace App {
   type GlobalLayoutSettings = {
     title: string; // 标题
     appList?: GlobalAppsMenu[]; // 跨站点导航
-    mode?: LayoutMode; // 布局模式
+    mode: LayoutMode; // 布局模式
     menu?: MenuOptions; // 菜单设置
-    aside?: AsideOptions; // 侧边栏设置
+    aside: AsideOptions; // 侧边栏设置
     logo?: LogoOptions;
     // actionsRender?: any;  // 操作按钮
     // avatarProps?: any; // 头像

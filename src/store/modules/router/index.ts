@@ -4,11 +4,14 @@
 import { defineStore } from 'pinia';
 
 import { router, staticRoutes } from '@/router';
+import { layout } from '@/settings';
 import {
   filterAuthRoutesByUserPermission,
   transformAuthRouteToMenu,
   transformAuthRouteToVueRoutes,
 } from '@/utils/router';
+
+const { mode, menu } = layout;
 
 interface RouteState {
   /**
@@ -19,7 +22,7 @@ interface RouteState {
   authRouteMode: ImportMetaEnv['VITE_AUTH_ROUTE_MODE'];
   // 是否初始化了权限路由
   isInitAuthRoute: boolean;
-  // 菜单
+  // 菜单（全部）
   menus: App.GlobalMenuOption[];
 }
 
@@ -28,6 +31,8 @@ export const useRouteStore = defineStore('route-store', {
     authRouteMode: import.meta.env.VITE_AUTH_ROUTE_MODE,
     isInitAuthRoute: false,
     menus: [],
+    sideMenus: [],
+    headerMenus: [],
   }),
   // NOTE actions 中支持 同步 / 异步 对状态进行操作
   actions: {
