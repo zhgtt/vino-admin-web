@@ -115,7 +115,7 @@ watch(
 .vino-page-header {
   padding: 0;
   background-color: transparent;
-  padding-block-end: 36px !important;
+  padding-block-end: 26px !important;
 }
 
 .vino-page-card {

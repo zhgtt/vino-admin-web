@@ -5,7 +5,7 @@
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router';
 
 import { routeName } from '@/router';
-import { useRouteStore } from '@/store';
+import { useAuthStore, useRouteStore } from '@/store';
 
 // 动态路由
 const createDynamicRouteGuard = async (
@@ -58,6 +58,10 @@ export const createPermissionGuard = async (
     next({ path: from.fullPath, replace: true, query: from.query });
     return;
   }
+
+  const auth = useAuthStore();
+
+  const actions = [];
 
   // 第一次已登录状态跳转至首页
 

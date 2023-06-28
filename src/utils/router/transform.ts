@@ -129,7 +129,7 @@ export const transformAuthRouteToVueRoute = (item: AuthRoute.Route) => {
 
 /**
  * 对路由进行排序
- * NOTE next - 下一个数据，pre - 上一个数据，返回值 > 0，next 在 pre 的后面，反之 next 在 pre 的前面
+ * NOTE next - 下一个数据，pre - 上一个数据；返回值 > 0，next 在 pre 的后面，反之 next 在 pre 的前面
  */
 export const sortRoutes = (routes: AuthRoute.Route[]) => {
   return routes

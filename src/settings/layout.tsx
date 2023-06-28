@@ -1,7 +1,6 @@
 /**
  * 整体布局的配置项
  */
-
 import appList from './apps.json';
 
 export const layout: App.GlobalLayoutSettings = {

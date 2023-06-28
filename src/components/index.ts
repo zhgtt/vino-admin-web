@@ -6,13 +6,14 @@ import type { App } from 'vue';
 
 import ProContainer from '@/components/ProContainer/index.vue';
 import SvgIcon from '@/components/SvgIcon/index.vue';
+import VueP5Wrapper from '@/components/VueP5Wrapper/index.vue';
 
 const setupComponents = (app: App) => {
   app.component('ProContainer', ProContainer);
 };
 
 /** 组件 */
-export { SvgIcon };
+export { SvgIcon, VueP5Wrapper };
 
 /** 全局组件 */
 export default setupComponents;

@@ -1,3 +1,6 @@
+/**
+ * 路由相关的类型
+ */
 declare type RawRouteComponent = import('vue-router').RouteComponent | Lazy<import('vue-router').RouteComponent>;
 
 declare namespace AuthRoute {

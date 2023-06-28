@@ -5,6 +5,7 @@ import { defineStore } from 'pinia';
 
 import { router, staticRoutes } from '@/router';
 import { layout } from '@/settings';
+import { useAuthStore } from '@/store';
 import {
   filterAuthRoutesByUserPermission,
   transformAuthRouteToMenu,
@@ -31,8 +32,6 @@ export const useRouteStore = defineStore('route-store', {
     authRouteMode: import.meta.env.VITE_AUTH_ROUTE_MODE,
     isInitAuthRoute: false,
     menus: [],
-    sideMenus: [],
-    headerMenus: [],
   }),
   // NOTE actions 中支持 同步 / 异步 对状态进行操作
   actions: {
@@ -42,7 +41,7 @@ export const useRouteStore = defineStore('route-store', {
     /** 是否为有效的固定路由 */
 
     /**
-     * 处理权限路由，将处理后的路由 转换成菜单、添加到 router 中
+     * NOTE 处理权限路由，将处理后的路由 转换成菜单、添加到 router 中
      */
     handleAuthRoute(routes: AuthRoute.Route[]) {
       // console.log('routes: ', routes);
@@ -67,8 +66,12 @@ export const useRouteStore = defineStore('route-store', {
      * 初始化静态路由
      */
     async initStaticRoute() {
-      const routes = filterAuthRoutesByUserPermission(staticRoutes); // 先根据用户权限过滤路由
-      this.handleAuthRoute(routes); // 再处理理由
+      const auth = useAuthStore();
+
+      // 先根据用户权限过滤路由
+      const routes = filterAuthRoutesByUserPermission(staticRoutes, auth.userInfo.userRole);
+      // 再处理理由
+      this.handleAuthRoute(routes);
 
       // 改变状态
       this.isInitAuthRoute = true;

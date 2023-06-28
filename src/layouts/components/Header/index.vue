@@ -46,9 +46,7 @@ const headerStyle = computed(() => {
           <NavMenu menu-mode="header" />
           <!-- TODO 右侧操作区域 -->
           <!-- TODO 用户头像 -->
-          <div class="vino-header-main-right">
-            <UserAvatar />
-          </div>
+          <UserAvatar />
         </div>
       </div>
     </header>

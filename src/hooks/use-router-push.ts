@@ -36,5 +36,10 @@ export const useRouterPush = () => {
     // routerPush({name})
   };
 
+  /**
+   * 登录成功后跳转重定向的地址
+   */
+  const toLoginRedirect = () => {};
+
   return { routerPush, routerBack, routerToHome };
 };

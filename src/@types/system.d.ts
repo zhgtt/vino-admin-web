@@ -62,7 +62,7 @@ declare namespace App {
   /** 全局公告栏设置 */
   type AlertOptions = {
     background?: string; // 背景颜色
-    message: string | (() => JSX.Element); // 自定义 message 内容
+    message: CustomContentType; // 自定义 message 内容
     isClosed?: boolean; // 是否可以关闭
     isShowIcon?: boolean?; // 是否显示图标
   };

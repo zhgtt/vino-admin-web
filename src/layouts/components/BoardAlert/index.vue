@@ -3,7 +3,7 @@ import { Alert } from 'ant-design-vue';
 
 import { system } from '@/settings';
 import { useAppStore } from '@/store';
-import { isFunction } from '@/utils';
+import { _renderCustomContent } from '@/utils';
 
 const { alert } = system;
 
@@ -11,10 +11,7 @@ const app = useAppStore();
 
 /** message 渲染 */
 const MessageRender = () => {
-  if (isFunction(alert?.message)) {
-    return alert?.message();
-  }
-  return alert?.message;
+  return _renderCustomContent(alert?.message!);
 };
 
 const handleClose = () => {

@@ -37,13 +37,6 @@ const renderComponent = computed(() => {
 @mixin common-bgColor {
   background-color: rgba(0, 0, 0, 0.04) !important;
 }
-/* @mixin menuitem-selected {
-  .ant-menu-item:active,
-  .ant-menu-item-selected,
-  .ant-menu-submenu-selected > .ant-menu-submenu-title {
-    @include common-style;
-  }
-} */
 
 .vino-inline-menu,
 .vino-horizontal-menu {
@@ -61,7 +54,6 @@ const renderComponent = computed(() => {
     border-radius: 4px !important;
     color: var(--nav-menu-color);
   }
-  /* @include menuitem-selected; */
   /* 选中的菜单组 */
   .ant-menu-submenu-selected > .ant-menu-submenu-title {
     background-color: transparent !important;
