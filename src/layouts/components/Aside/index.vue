@@ -6,7 +6,7 @@
 import { LayoutSider } from 'ant-design-vue';
 import { computed, ref, watch } from 'vue';
 
-import { LeftOutlined } from '@/components/Svg';
+import { SvgIcon } from '@/components';
 import { Logo, NavMenu } from '@/layouts/components';
 import { layout } from '@/settings';
 import { useAppStore } from '@/store';
@@ -67,7 +67,11 @@ watch(collapsed, (newVal) => {
       ]"
       @click="collapsed = !collapsed"
     >
-      <LeftOutlined :style="{ transform: `rotate(${collapsed ? '-90deg' : '90deg'})` }" />
+      <SvgIcon
+        icon="bottom-outlined"
+        type="local"
+        :style="{ transform: `rotate(${collapsed ? '-90deg' : '90deg'})` }"
+      />
     </div>
   </LayoutSider>
 </template>

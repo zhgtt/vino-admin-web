@@ -1,14 +1,15 @@
 import { h } from 'vue';
 
 import { SvgIcon } from '@/components';
+import { isString } from "@/utils";
 
 /** 不将路由转换成菜单 */
 const hideInMenu = (route: AuthRoute.Route) => Boolean(route.meta?.hide);
 
 /** 渲染 icon */
 const iconRender = (icon: AuthRoute.RouteMeta['icon']) => {
-  if (typeof icon === 'string') {
-    return () => h(SvgIcon, { name: icon });
+  if (isString(icon)) {
+    return () => h(SvgIcon, { icon });
   } else {
     return () => h(SvgIcon, icon);
   }

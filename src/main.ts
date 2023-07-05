@@ -1,14 +1,20 @@
 import { createApp } from 'vue';
 
 import setupComponents from '@/components';
+import { setupAssets } from '@/plugins';
 import { setupRouter } from '@/router';
 import { setupStore } from '@/store';
 import App from './App.vue';
 
-import 'ant-design-vue/dist/reset.css';
-import './style.scss';
+import '@/styles/main.scss';
+import 'ant-design-vue/dist/reset.css'; // antd 的重置样式
 
 const setupApp = async () => {
+  // 挂载全局插件（静态）
+  setupAssets();
+
+  // TODO 引入 App Loading
+
   const app = createApp(App);
 
   // 注册全局组件

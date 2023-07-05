@@ -3,7 +3,7 @@ import { Popover } from 'ant-design-vue';
 import type { CSSProperties } from 'vue';
 import { PropType, defineComponent, ref } from 'vue';
 
-import { AppsIcon } from '@/components/Svg';
+import { SvgIcon } from '@/components';
 import { layout } from '@/settings';
 
 const { appList = [] } = layout;
@@ -60,7 +60,7 @@ const AppItemRender = defineComponent({
       ]"
       :style="style"
     >
-      <AppsIcon />
+      <SvgIcon icon="apps-menu" type="local" />
     </div>
 
     <template #content>

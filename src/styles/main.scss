@@ -1,0 +1,43 @@
+/** 全局引入 tailwind **/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './transition.scss';
+
+:root {
+  --nav-menu-color: rgba(0, 0, 0, 0.65);
+  --nav-menu-color-selected: rgba(0, 0, 0, 0.95);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 1440px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/** 顶部进度条 nprogress 样式 **/
+#nprogress {
+  .bar {
+    background-color: transparent !important;
+  }
+  .peg {
+    box-shadow: 0 0 10px #1677ff, 0 0 5px #1677ff !important;
+  }
+}
