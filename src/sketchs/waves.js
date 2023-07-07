@@ -1,3 +1,7 @@
+/**
+ * 波浪纹动画
+ * - 参考优秀源码：https://github.com/unicar9/jizhi
+ */
 export default function waves(p) {
   // 配置项，也是传递给外部的可控的状态
   let mountains = [];

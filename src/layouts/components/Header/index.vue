@@ -5,10 +5,7 @@
 import { computed } from 'vue';
 
 import { BoardAlert, Logo, NavMenu, UserAvatar } from '@/layouts/components';
-import { layout } from '@/settings';
 import { useAppStore } from '@/store';
-
-const { mode } = layout;
 
 const app = useAppStore();
 
@@ -19,38 +16,24 @@ const headerStyle = computed(() => {
 </script>
 
 <template>
-  <!-- 侧边栏的 header，只有 alert -->
-  <template v-if="mode === 'side'">
-    <template v-if="app.isShowlAlert">
-      <header class="bg-transparent z-[19]" :style="{ height: '48px', lineHeight: '48px' }" />
-      <header class="fixed w-full z-[100] left-0" :style="{ height: '48px', lineHeight: '48px' }">
-        <!-- 顶部 alert -->
-        <BoardAlert />
-      </header>
-    </template>
-  </template>
+  <header :style="headerStyle" class="bg-transparent z-[19]" />
+  <header :class="['vino-layout-header', 'fixed w-full']" :style="headerStyle">
+    <!-- 顶部 alert -->
+    <BoardAlert v-if="app.isShowlAlert" />
 
-  <!-- 顶部导航栏的 header -->
-  <template v-else>
-    <header :style="headerStyle" class="bg-transparent z-[19]" />
-    <header :class="['vino-layout-header', 'fixed w-full']" :style="headerStyle">
-      <!-- 顶部 alert -->
-      <BoardAlert v-if="app.isShowlAlert" />
-
-      <!-- 顶部导航栏 -->
-      <div class="relative w-full h-full bg-transparent" :style="{ height: '56px', lineHeight: '56px' }">
-        <div :class="['vino-header-main', 'flex h-full']">
-          <!-- logo -->
-          <Logo />
-          <!-- 菜单 -->
-          <NavMenu menu-mode="header" />
-          <!-- TODO 右侧操作区域 -->
-          <!-- TODO 用户头像 -->
-          <UserAvatar />
-        </div>
+    <!-- 顶部导航栏 -->
+    <div class="relative w-full h-full bg-transparent" :style="{ height: '56px', lineHeight: '56px' }">
+      <div :class="['vino-header-main', 'flex h-full']">
+        <!-- logo -->
+        <Logo />
+        <!-- 菜单 -->
+        <NavMenu menu-mode="header" />
+        <!-- TODO 右侧操作区域 -->
+        <!-- TODO 用户头像 -->
+        <UserAvatar />
       </div>
-    </header>
-  </template>
+    </div>
+  </header>
 </template>
 
 <style lang="scss">

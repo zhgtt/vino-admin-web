@@ -5,6 +5,7 @@
 import { Button, Form, Input, Modal, Space, Table } from 'ant-design-vue';
 import type { App } from 'vue';
 
+import ImageVerify from '@/components/ImageVerify/index.vue';
 import ProContainer from '@/components/ProContainer/index.vue';
 import SvgIcon from '@/components/SvgIcon/index.vue';
 import VueP5Wrapper from '@/components/VueP5Wrapper/index.vue';
@@ -24,7 +25,7 @@ const setupComponents = (app: App) => {
 };
 
 /** 组件 */
-export { SvgIcon, VueP5Wrapper };
+export { SvgIcon, VueP5Wrapper, ImageVerify };
 
 /** 全局组件 */
 export default setupComponents;

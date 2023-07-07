@@ -7,7 +7,7 @@ import { LayoutSider } from 'ant-design-vue';
 import { computed, ref, watch } from 'vue';
 
 import { SvgIcon } from '@/components';
-import { Logo, NavMenu } from '@/layouts/components';
+import { NavMenu } from '@/layouts/components';
 import { layout } from '@/settings';
 import { useAppStore } from '@/store';
 
@@ -53,8 +53,6 @@ watch(collapsed, (newVal) => {
     collapsed-width="64"
     :style="siderStyle"
   >
-    <!-- logo -->
-    <Logo v-if="mode === 'side'" />
     <!-- 菜单 -->
     <NavMenu menu-mode="side" />
     <!-- TODO 侧边栏操作区域内容 -->

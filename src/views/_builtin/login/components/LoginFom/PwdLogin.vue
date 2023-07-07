@@ -2,7 +2,7 @@
 /**
  * 账号密码登录
  */
-import { Checkbox } from 'ant-design-vue';
+import { Checkbox, InputPassword } from 'ant-design-vue';
 import { reactive } from 'vue';
 
 import { SvgIcon } from '@/components';
@@ -38,11 +38,11 @@ const onFinishFailed = () => {};
       </Input>
     </FormItem>
     <FormItem name="password" :rules="[{ required: true, message: '请输入密码!' }]">
-      <Input v-model:value="accountLoginForm.password" placeholder="密码: vino" size="large">
+      <InputPassword v-model:value="accountLoginForm.password" placeholder="密码: vino" size="large">
         <template #prefix>
           <SvgIcon icon="lock-outlined" />
         </template>
-      </Input>
+      </InputPassword>
     </FormItem>
     <FormItem name="verifyCode" :rules="[{ required: true, message: '请输入正确的验证码!' }]">
       <Input v-model:value="accountLoginForm.verifyCode" placeholder="验证码,点击图片刷新" size="large">
@@ -57,13 +57,12 @@ const onFinishFailed = () => {};
       </FormItem>
       <a class="float-right" href="">忘记密码?</a>
     </FormItem>
-    <FormItem no-style>
+    <FormItem>
       <Button class="w-full" size="large" type="primary" html-type="submit">登录</Button>
     </FormItem>
+    <FormItem no-style>
+      还没有账号?
+      <a class="" href="">前去注册</a>
+    </FormItem>
   </Form>
-
-  <div class="pt-2">
-    还没有账号?
-    <Button type="link" class="pl-1">前去注册</Button>
-  </div>
 </template>

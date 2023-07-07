@@ -1,5 +1,6 @@
 export * from './array';
-export * from './data';
+export * from './colors';
 export * from './object';
 export * from './treedata';
 export * from './typeof';
+export * from './values';

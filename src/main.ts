@@ -7,7 +7,6 @@ import { setupStore } from '@/store';
 import App from './App.vue';
 
 import '@/styles/main.scss';
-import 'ant-design-vue/dist/reset.css'; // antd 的重置样式
 
 const setupApp = async () => {
   // 挂载全局插件（静态）

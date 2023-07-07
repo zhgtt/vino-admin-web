@@ -38,10 +38,9 @@ declare namespace App {
   /**
    * layout 布局模式
    * - top - 只展示顶部导航栏
-   * - side - 只展示侧边栏
    * - mix - 混合模式
    */
-  type LayoutMode = 'top' | 'side' | 'mix';
+  type LayoutMode = 'top' | 'mix';
 
   /** 侧边栏设置 */
   type AsideOptions = {
