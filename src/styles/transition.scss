@@ -1,6 +1,16 @@
 /** 引入 animate.css **/
 @import 'animate.css';
 
+/* animate__bounce */
+.animate__bounce-enter-active,
+.animate__bounce-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+.animate__bounce-enter-from,
+.animate__bounce-leave-to {
+  opacity: 0;
+}
+
 /* fade */
 .fade-enter-active,
 .fade-leave-active {

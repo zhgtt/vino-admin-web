@@ -5,15 +5,16 @@
 export default function waves(p) {
   // 配置项，也是传递给外部的可控的状态
   let mountains = [];
-  let bgColor = '#e6e6e6';
+  let bgColor = '#f5f5f5';
   // let bgColor = '249, 249, 249, 20';
   // let isDarkMode = false; // 是否暗黑模式
   let waveColor = p?.waveColor || '#005CAF'; // 默认色值
   let bg = null; // 背景图片
 
-  p.preload = function () {
-    bg = p.loadImage('https://gw.alipayobjects.com/zos/rmsportal/FfdJeJRQWjEeGTpqgBKj.png');
-  };
+  // p.preload = function () {
+  // p.loadImage 会有自带的默认 Loading... 样式，暂时不知道怎么去掉
+  //   bg = p.loadImage('https://gw.alipayobjects.com/zos/rmsportal/FfdJeJRQWjEeGTpqgBKj.png');
+  // };
 
   /** 初始化画布 */
   p.setup = function () {
@@ -25,8 +26,9 @@ export default function waves(p) {
 
   /** 在画布上执行动画效果，可以看作是一个动画循环的函数，可以在这里绘制图形，处理事件交互等 */
   p.draw = function () {
-    // p.background(bgColor);
-    p.background(bg); // 设置画布的背景色
+    // 设置画布的背景色
+    p.background(bgColor);
+    // p.background(bg);
     mountains.forEach((m) => m.display(p));
   };
 

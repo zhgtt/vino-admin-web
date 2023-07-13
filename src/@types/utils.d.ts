@@ -1,3 +1,6 @@
+/**
+ * 工具函数相关的类型提示
+ */
 declare namespace TypeUtil {
   /** 数据类型 */
   interface DataType {
@@ -22,6 +25,5 @@ declare namespace TypeUtil {
   type DataTypeStringKey = keyof DataType;
 
   // Capitalize 将对应的字符串转成首字母大写
-  type DataTypeString<T extends DataTypeStringKey = DataTypeStringKey> =
-    `[object ${Capitalize<T>}]`;
+  type DataTypeString<T extends DataTypeStringKey = DataTypeStringKey> = `[object ${Capitalize<T>}]`;
 }

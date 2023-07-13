@@ -1,3 +1,7 @@
+/**
+ * 项目环境的相关类型提示
+ */
+
 interface ImportMetaEnv {
   /** 项目基本地址 */
   readonly VITE_BASE_URL: string;
@@ -20,4 +24,8 @@ interface ImportMetaEnv {
    * - dynamic - 后端返回的动态路由
    */
   readonly VITE_AUTH_ROUTE_MODE: 'static' | 'dynamic';
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
 }

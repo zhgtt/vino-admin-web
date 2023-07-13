@@ -1,3 +1,7 @@
+/**
+ * 系统配置相关的；类型
+ */
+
 /** 主题相关类型 */
 declare namespace Theme {}
 

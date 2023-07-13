@@ -5,7 +5,8 @@ import type { RouteRecordRaw } from 'vue-router';
 
 import { getLayoutComponent, getViewComponent } from './component';
 
-/** TODO 是否为动态权限路由 */
+/** 是否为动态权限路由 */
+const hasDynamicPath = (item: AuthRoute.Route) => Boolean(item.meta?.dynamicPath);
 
 /** 是否有组件 */
 const hasComponent = (item: AuthRoute.Route) => Boolean(item.component);
@@ -36,6 +37,11 @@ export const transformAuthRouteToVueRoute = (item: AuthRoute.Route) => {
   const resultRoute: RouteRecordRaw[] = [];
 
   const itemRoute = { ...item } as RouteRecordRaw;
+
+  /** 处理动态路由 */
+  if (hasDynamicPath(item)) {
+    Object.assign(itemRoute, { path: item.meta?.dynamicPath });
+  }
 
   /** 处理外链路由，将该路由的页面设置为 404 */
   if (hasHref(item)) {

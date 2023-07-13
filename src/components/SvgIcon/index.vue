@@ -50,6 +50,7 @@ const iconName = computed<string>(() => {
   return _convertToCamelCase(icon, true);
 });
 
+// NOTE 添加公共属性
 const bindAttrs = computed<{ class: string; style: string }>(() => ({
   class: (attrs.class as string) || '',
   style: (attrs.style as string) || '',

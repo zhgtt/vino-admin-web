@@ -1,3 +1,6 @@
+/**
+ * 对组件、module 的类型定义，以免 ts 不认识
+ */
 declare module '*.vue' {
   import { ComponentOptions } from 'vue';
   const componentOptions: ComponentOptions;

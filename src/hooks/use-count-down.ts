@@ -13,7 +13,7 @@ export const useCountDown = (second: number) => {
   const { setTrue, setFalse } = useBoolean();
 
   const counts = ref(0); // 计数
-  const isCounting = computed(() => Boolean(counts.value)); // 倒计时的状态
+  const isCounting = computed(() => Boolean(counts.value)); // 倒计时的状态（为 true 表示正在倒计时，为 false 表示倒计时结束）
 
   let timer: any = null; // 定时器
 

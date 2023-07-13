@@ -12,7 +12,7 @@ export const createRouterGuards = (router: Router) => {
   router.beforeEach(async (to, from, next) => {
     // 开始加载进度条
     start();
-
+    
     // 页面跳转权限处理
     await createPermissionGuard(to, from, next);
   });

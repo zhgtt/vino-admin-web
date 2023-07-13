@@ -27,6 +27,8 @@ declare namespace AuthRoute {
   interface RouteMeta<> {
     /** 路由标题，可以用来作 document.title 或 菜单 的标题 */
     title: string;
+    /** 路由的动态路径（仅适用于需要动态路由的页面） */
+    dynamicPath?: string;
     /** 是否需要登录权限 */
     requiresAuth?: boolean;
     /** 是否为缓存页面 */
@@ -75,3 +77,5 @@ declare namespace AuthRoute {
   /** 前端导入的路由模块 */
   type RouteModule = Record<string, { default: Route }>;
 }
+
+declare namespace AuthRouteUtils {}
