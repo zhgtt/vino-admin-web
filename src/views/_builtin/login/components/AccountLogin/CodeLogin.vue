@@ -5,13 +5,14 @@
 import { reactive } from 'vue';
 
 import { SvgIcon } from '@/components';
-import { useSmsCode } from '@/hooks';
+import { useRouterPush, useSmsCode } from '@/hooks';
 
 interface FormState {
   phone: string;
   verifyCode: string;
 }
 
+const { toLoginModule } = useRouterPush();
 const { label, isCounting, loading: smsLoading, getSmsCode } = useSmsCode();
 
 const formState = reactive<FormState>({
@@ -57,7 +58,7 @@ const handleSmsCode = () => {
     </FormItem>
     <FormItem no-style>
       还没有账号?
-      <a class="" href="">前去注册</a>
+      <a @click="toLoginModule('register')">前去注册</a>
     </FormItem>
   </Form>
 </template>

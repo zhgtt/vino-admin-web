@@ -1,9 +1,13 @@
 <script lang="ts" setup>
+/**
+ * 二维码登录
+ */
 import type { QRCodeProps } from 'ant-design-vue';
 import { QRCode } from 'ant-design-vue';
 import { computed } from 'vue';
 
 import { useCountDown } from '@/hooks';
+import LoginHeader from '../LoginHeader/index.vue';
 
 const { start, isCounting } = useCountDown(60);
 
@@ -23,6 +27,8 @@ const refreshChange = () => {
 </script>
 
 <template>
+  <LoginHeader title="扫码安全登录 / 注册" />
+
   <div :class="['qrcode-login', 'flex flex-col items-center']">
     <QRCode
       error-level="H"

@@ -1,26 +1,25 @@
 <script lang="ts" setup>
 /**
- * 忘记密码、重置密码
+ * 手机号注册
  */
 import { InputPassword } from 'ant-design-vue';
 import { reactive } from 'vue';
 
 import { SvgIcon } from '@/components';
-import { useRouterPush, useSmsCode } from '@/hooks';
-import LoginHeader from '../LoginHeader/index.vue';
+import { useSmsCode } from '@/hooks';
+import UserAgreement from '../UserAgreement/index.vue';
 
 interface FormState {
-  password1: string;
+  username: string;
   password: string;
   phone: string;
   verifyCode: string;
 }
 
-const { toLoginModule } = useRouterPush();
 const { label, isCounting, loading: smsLoading, getSmsCode } = useSmsCode();
 
 const formState = reactive<FormState>({
-  password1: '',
+  username: '',
   phone: '',
   password: '',
   verifyCode: '',
@@ -39,9 +38,14 @@ const handleSmsCode = () => {
 </script>
 
 <template>
-  <LoginHeader title="重置密码" @back="toLoginModule('account-login')" />
-
   <Form :model="formState" name="account_login" @finish="onFinish" @finishFailed="onFinishFailed">
+    <FormItem name="username" :rules="[{ required: true, message: '请输入用户名!' }]">
+      <Input v-model:value="formState.username" placeholder="用户名" size="large">
+        <template #prefix>
+          <SvgIcon icon="user-outlined" />
+        </template>
+      </Input>
+    </FormItem>
     <FormItem name="phone" :rules="[{ required: true, message: '请输入正确的手机号!' }]">
       <Input v-model:value="formState.phone" placeholder="手机号" size="large">
         <template #prefix>
@@ -68,15 +72,12 @@ const handleSmsCode = () => {
         </template>
       </InputPassword>
     </FormItem>
-    <FormItem name="password1" :rules="[{ required: true, message: '请输入确认密码!' }]">
-      <InputPassword v-model:value="formState.password1" placeholder="确认密码" size="large">
-        <template #prefix>
-          <SvgIcon icon="lock-outlined" />
-        </template>
-      </InputPassword>
-    </FormItem>
     <FormItem>
-      <Button class="w-full" size="large" type="primary" html-type="submit">确定</Button>
+      <Button class="w-full" size="large" type="primary" html-type="submit">注册</Button>
+    </FormItem>
+    <!-- 用户协议 -->
+    <FormItem>
+      <UserAgreement />
     </FormItem>
   </Form>
 </template>

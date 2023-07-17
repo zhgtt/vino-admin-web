@@ -90,7 +90,7 @@ watch(
   </PageHeader>
 
   <div class="vino-page-card">
-    <Card :bordered="false" :body-style="{ padding: '16px 24px' }" class="h-full">
+    <Card :bordered="false" :body-style="{ padding: '16px 24px', height: '100%' }" class="h-full">
       <slot name="default" />
     </Card>
   </div>

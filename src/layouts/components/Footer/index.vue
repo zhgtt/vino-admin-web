@@ -9,7 +9,7 @@ const { footer } = layout;
 
 <template>
   <template v-if="footer?.copyright">
-    <footer class="vino-footer">
+    <footer :class="['vino-footer', 'text-center']">
       <span>{{ footer.copyright }}</span>
     </footer>
   </template>
@@ -22,7 +22,6 @@ const { footer } = layout;
   animation-name: footerLazy;
   animation-duration: 0.3s;
   animation-timing-function: ease;
-  text-align: center;
   padding-inline: 40px;
   padding-block-end: 16px;
   line-height: 1.3;

@@ -4,7 +4,7 @@
 import { defineStore } from 'pinia';
 
 import { router, staticRoutes } from '@/router';
-import { layout } from '@/settings';
+// import { layout } from '@/settings';
 import { useAuthStore } from '@/store';
 import {
   filterAuthRoutesByUserPermission,
@@ -12,7 +12,7 @@ import {
   transformAuthRouteToVueRoutes,
 } from '@/utils/router';
 
-const { mode, menu } = layout;
+// const { mode, menu } = layout;
 
 interface RouteState {
   /**
@@ -70,7 +70,7 @@ export const useRouteStore = defineStore('route-store', {
 
       // 先根据用户权限过滤路由
       const routes = filterAuthRoutesByUserPermission(staticRoutes, auth.userInfo.userRole);
-      // 再处理理由
+      // 再处理路由
       this.handleAuthRoute(routes);
 
       // 改变状态

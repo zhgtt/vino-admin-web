@@ -2,7 +2,8 @@
 import { Segmented } from 'ant-design-vue';
 import { computed, h, reactive, ref } from 'vue';
 
-import { OtherLogin } from '../index';
+import LoginHeader from '../LoginHeader/index.vue';
+import OtherLogin from '../OtherLogin/index.vue';
 import CodeLogin from './CodeLogin.vue';
 import PwdLogin from './PwdLogin.vue';
 
@@ -13,14 +14,14 @@ const options = reactive([
 ]);
 
 const component = computed(() => {
-  if (activeKey.value === '1') {
-    return h(PwdLogin);
-  }
+  if (activeKey.value === '1') return h(PwdLogin);
   return h(CodeLogin);
 });
 </script>
 
 <template>
+  <LoginHeader title="欢迎登录 Vino Web!" />
+
   <Segmented :options="options" v-model:value="activeKey" size="large" class="mb-4" />
 
   <!-- <keep-alive> -->

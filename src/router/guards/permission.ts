@@ -13,17 +13,17 @@ const createDynamicRouteGuard = async (
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
-  const route = useRouteStore(); // 引入 route store 全局的状态管理
+  const routeStore = useRouteStore(); // 引入 route store 全局的状态管理
 
   // 初始化权限路由，如果未初始化动态权限路由，需走到 store 中（通常是第一次页面渲染或页面刷新）
-  if (!route.isInitAuthRoute) {
+  if (!routeStore.isInitAuthRoute) {
     // 未登录的情况下直接跳转至登录页，登陆成功后再加载权限路由
     // if (!isLogin) {
     //   return false
     // }
 
     // 根据不同模式，执行其对应的初始化权限路由逻辑
-    await route.initAuthRoute();
+    await routeStore.initAuthRoute();
 
     next({ path: to.fullPath, replace: true });
   }

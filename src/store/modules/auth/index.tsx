@@ -4,6 +4,7 @@
 import { notification } from 'ant-design-vue';
 import { defineStore } from 'pinia';
 
+import { useRouterPush } from '@/hooks';
 import { useRouteStore } from '@/store';
 import { getToken, getUserInfo } from './helpers';
 
@@ -34,56 +35,6 @@ export const useAuthStore = defineStore('auth-store', {
   },
   actions: {
     /**
-     * 登录
-     */
-    async login() {
-      this.loginLoading = true;
-      /** TODO 这里处理登录的逻辑，调用接口 */
-      // const { data } = await fetchLogin();
-      // if (data) {
-      await this.handleActionAfterLogin();
-      // }
-      this.loginLoading = false;
-    },
-
-    /**
-     * 重置 auth 状态
-     */
-    resetAuthStore() {
-      this.$reset(); // 重置状态
-    },
-
-    /**
-     * NOTE 处理登录成功/失败的逻辑
-     */
-    async handleActionAfterLogin() {
-      const route = useRouteStore();
-
-      /** 根据 token 获取用户信息，表明登录成功 */
-      const loginSuccess = await this.loginByToken();
-
-      if (loginSuccess) {
-        await route.initAuthRoute(); // 初始化路由
-
-        // 跳转登录后的地址
-
-        // 登录成功弹出欢迎提示（需等待路由初始化完成）
-        if (route.isInitAuthRoute) {
-          notification.success({
-            message: '登录成功',
-            description: `欢迎回来，${this.userInfo.userName}`,
-            duration: 4.5,
-          });
-        }
-
-        return;
-      }
-
-      // 不成功则重置状态
-      this.resetAuthStore();
-    },
-
-    /**
      * 根据 token 获取用户信息，判断是否真正的登录成功
      */
     async loginByToken() {
@@ -103,6 +54,61 @@ export const useAuthStore = defineStore('auth-store', {
       // }
 
       return successFlag;
+    },
+
+    /**
+     * 登录接口
+     * @param params
+     */
+    async login(params = {}) {
+      this.loginLoading = true;
+      /** TODO 这里处理登录的逻辑，调用接口 */
+      // const { data } = await fetchLogin();
+      // if (data) {
+      setTimeout(async () => {
+        await this.handleActionAfterLogin();
+        this.loginLoading = false;
+      }, 3000);
+      // }
+    },
+
+    /**
+     * 重置 auth 状态
+     */
+    resetAuthStore() {
+      this.$reset(); // 重置状态
+    },
+
+    /**
+     * 处理登录成功/失败的逻辑
+     */
+    async handleActionAfterLogin() {
+      const routeStore = useRouteStore();
+      const { toLoginRedirect } = useRouterPush(false);
+
+      /** 根据 token 获取用户信息，表明登录成功 */
+      const loginSuccess = await this.loginByToken();
+
+      if (loginSuccess) {
+        await routeStore.initAuthRoute(); // 初始化路由
+
+        // 跳转登录后的地址
+        toLoginRedirect();
+
+        // 登录成功弹出欢迎提示（需等待路由初始化完成）
+        if (routeStore.isInitAuthRoute) {
+          notification.success({
+            message: '登录成功',
+            description: `欢迎回来，${this.userInfo.userName}`,
+            duration: 4.5,
+          });
+        }
+
+        return;
+      }
+
+      // 不成功则重置状态
+      this.resetAuthStore();
     },
 
     /**

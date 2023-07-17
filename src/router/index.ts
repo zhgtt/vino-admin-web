@@ -22,7 +22,7 @@ export const setupRouter = async (app: App) => {
   await router.isReady(); // 路由准备就绪后挂载 App 实例
 };
 
-/** 定义所有的路由名称 */
+/** 以函数的形式定义所有的路由名称 */
 export const routeName = (key: AuthRoute.AllRouteKey) => key;
 /** 定义所有的路由路径 */
 // export const routePath = (key: Exclude<AuthRoute.AllRouteKey, 'not-found'>) => transformRouteNameToRoutePath(key);

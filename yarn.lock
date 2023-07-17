@@ -1038,10 +1038,10 @@ ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-ant-design-vue@^4.0.0-beta.4:
-  version "4.0.0-beta.4"
-  resolved "http://ccinpm.citycloud.com.cn/ant-design-vue/-/ant-design-vue-4.0.0-beta.4.tgz#a52090d1b5f6219999a2870efe73ed7fa1878896"
-  integrity sha512-7CCtStK1jydXgQJvPIg+qg4zzhiLyITl96QjFWPvVLvhhsOneadWQpE1ebHdMhb3DlKeJPRSOUEQ/v8/U9mzgQ==
+ant-design-vue@^4.0.0:
+  version "4.0.0"
+  resolved "http://ccinpm.citycloud.com.cn/ant-design-vue/-/ant-design-vue-4.0.0.tgz#82ea182d44530d7663c999d9b4d594206524b21a"
+  integrity sha512-6V8DxHPv3HJYDdv48W/KFOUjeZDsYJhFlk13HFSKCJSR2MQs4YnPIAC+rWie9vYcVEKbO+cQDqiOM3cBoHMNUQ==
   dependencies:
     "@ant-design/colors" "^6.0.0"
     "@ant-design/icons-vue" "^6.1.0"

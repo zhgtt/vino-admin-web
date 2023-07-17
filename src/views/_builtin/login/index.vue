@@ -1,15 +1,14 @@
 <script lang="tsx" setup>
-import { Card, Col, Row, Tooltip } from 'ant-design-vue';
+import { Card, Col, Row } from 'ant-design-vue';
 import type { Component } from 'vue';
-import { computed } from 'vue';
+import { computed, provide } from 'vue';
 
 import WelcomeSVG from '@/assets/image/welcome.svg';
-import { SvgIcon, VueP5Wrapper } from '@/components';
+import { VueP5Wrapper } from '@/components';
 import NipponColors from '@/constants/colors/NipponColors.json'; // 日本传统色
-import { useRouterPush } from '@/hooks';
 import { waves } from '@/sketchs';
 import { _colorToRGB, _getRandomInteger } from '@/utils';
-import { LoginForm, QrCodeLogin, RegisterUser, ResetPwd } from './components';
+import { AccountLogin, ChangeModule, QrCodeLogin, RegisterUser, ResetPwd } from './components';
 
 interface Props {
   /** 登录模块分类 */
@@ -18,27 +17,28 @@ interface Props {
 
 interface LoginModule {
   key: UnionKey.LoginModule;
-  label: string; // 标题
   component: Component;
 }
 
 /** 随机颜色 */
 const num = _getRandomInteger(1, 253);
-console.log('num: ', num);
+console.warn('num: ', num);
 const rendomColor = NipponColors[num]?.color;
-console.log('rendomColor: ', rendomColor);
+console.warn('rendomColor: ', rendomColor);
 
 const rgbColor = _colorToRGB(rendomColor, 0.28);
 
 const { module } = defineProps<Props>();
 
-const { toLoginModule } = useRouterPush();
+/** NOTE 父子组件共享属性 */
+provide('module', module);
 
+/** 登录模块 */
 const modules: LoginModule[] = [
-  { key: 'account-login', label: '欢迎登录 Vino Web!', component: LoginForm },
-  { key: 'qrcode-login', label: '微信安全登录', component: QrCodeLogin },
-  { key: 'register', label: '账号注册', component: RegisterUser },
-  { key: 'reset-pwd', label: '重置密码', component: ResetPwd },
+  { key: 'account-login', component: AccountLogin },
+  { key: 'qrcode-login', component: QrCodeLogin },
+  { key: 'register', component: RegisterUser },
+  { key: 'reset-pwd', component: ResetPwd },
 ];
 
 const activeModule = computed(() => {
@@ -50,10 +50,6 @@ const activeModule = computed(() => {
   }
   return active;
 });
-const tooltipTitle = computed(() => {
-  if (module === 'account-login') return '二维码登录';
-  return '密码 / 手机登录';
-});
 </script>
 
 <template>
@@ -64,48 +60,31 @@ const tooltipTitle = computed(() => {
     <!-- animate__fadeInLeft -->
     <Card
       :bordered="false"
-      class="absolute bg-transparent w-[62%] animate__animated animate__zoomInDown backdrop-blur"
+      class="absolute bg-transparent w-[56%] animate__animated animate__zoomInDown backdrop-blur"
       :body-style="{ padding: 0 }"
     >
       <Row>
         <Col :span="10" class="px-4 rounded-s-lg" :style="{ backgroundColor: rgbColor }">
           <img :src="WelcomeSVG" alt="" class="w-full h-full" />
         </Col>
-        <Col :span="14" :class="['login-right', 'pb-8 pt-12 relative rounded-e-lg']">
-          <!-- check 切换 -->
+        <Col :span="14" :class="['login-right', 'rounded-e-lg relative']">
+          <!-- 右上角的切换模块（在 重置密码、注册账号 模块不展示） -->
           <template v-if="module !== 'reset-pwd'">
-            <Tooltip placement="left" :title="tooltipTitle">
-              <div class="absolute right-0 top-0 w-16 h-16 overflow-hidden">
-                <div
-                  :class="['change-box-tips']"
-                  @click="toLoginModule(module === 'qrcode-login' ? 'account-login' : 'qrcode-login')"
-                >
-                  <SvgIcon
-                    type="local"
-                    :class="['change-icon']"
-                    :icon="module === 'qrcode-login' ? 'account' : 'qrcode'"
-                  />
-                </div>
-              </div>
-            </Tooltip>
+            <ChangeModule />
           </template>
 
-          <!-- <div class="text-center">
-            <div :class="['login-header-desc']">走走停停，不如定定</div>
-          </div> -->
-          <div :class="['login-main']">
-            <div class="mb-10 relative flex items-end">
-              <SvgIcon icon="dino-drawing" type="local" :style="{ fontSize: '44px' }" />
-              <h2 class="inline-block ml-3">{{ activeModule.label }}</h2>
-            </div>
+          <div :class="['login-main', 'py-12 m-auto']">
             <!-- 表单 -->
             <component :is="activeModule.component" />
           </div>
         </Col>
       </Row>
     </Card>
+
     <!-- canvas 图层 -->
-    <VueP5Wrapper :sketch="waves" :options="{ waveColor: rendomColor }" />
+    <div class="absolute w-full h-full -z-10 overflow-hidden">
+      <VueP5Wrapper :sketch="waves" :options="{ waveColor: rendomColor }" />
+    </div>
   </div>
 </template>
 
@@ -116,37 +95,9 @@ const tooltipTitle = computed(() => {
   width: 100%; */
   .login-right {
     background-color: rgba(255, 255, 255, 0.82);
-    /* .login-header-desc {
-      color: rgba(0, 0, 0, 0.65);
-    } */
-    .change-box-tips {
-      background-color: #f5f5f5;
-      transform: skewY(45deg); // 倾斜
-      transform-origin: top right;
-      box-shadow: rgb(204, 219, 232) 0px 10px 10px -10px;
-      color: #a9aeb8;
-      transition: color 0.3s;
-      width: 64px;
-      height: 64px;
-      border-top-right-radius: 8px;
-      overflow: hidden;
-      cursor: pointer;
 
-      &:hover {
-        color: #1677ff;
-      }
-
-      :deep(.change-icon) {
-        position: absolute;
-        transform: skewY(315deg);
-        top: 42px;
-        left: 10px;
-        font-size: 44px;
-      }
-    }
     .login-main {
       width: 328px;
-      margin: 0 auto;
 
       // antd form
       :deep(.ant-form-item) {
