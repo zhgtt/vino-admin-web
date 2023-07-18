@@ -1,21 +1,12 @@
 <script setup lang="ts">
 /**
- * NOTE 整体布局方式
- * Container - 内容; Header - 顶部导航; Aside - 侧边栏; Menu - 菜单; Logo - logo和跨站点导航菜单（只有 Aside 和 Container 是独立的）
- * Container 中包含 Header
- * Header 包含 Menu 和 Logo
- * Aside 包含 Menu 和 Logo
- *
- * top 模式下：只有 Container
- * side 和 mix 模式下：既有 Container，又有 Aside
- *
- * mix 模式下：Logo 只会显示在 Header 中，Aside 中不能有 Logo
+ * 基础布局方式
  */
 import { Layout } from 'ant-design-vue';
 
 import { layout } from '@/settings';
 import { useAppStore } from '@/store';
-import { Aside, Container } from './components';
+import { GlobalContent, GlobalFooter, GlobalHeader, GlobalSider, GlobalTabs } from './components';
 
 const { mode } = layout;
 
@@ -45,8 +36,24 @@ const app = useAppStore();
     </div>
     <!-- 布局 -->
     <Layout class="min-h-full">
-      <Aside v-if="app.isShowAside && mode !== 'top'" />
-      <Container />
+      <!-- 侧边栏 -->
+      <GlobalSider v-if="app.isShowAside && mode !== 'top'" />
+
+      <div class="relative w-full flex flex-col bg-transparent">
+        <!-- 顶部导航栏 -->
+        <GlobalHeader />
+
+        <!-- tabs 标签页 -->
+        <GlobalTabs />
+
+        <!-- 主体内容 -->
+        <GlobalContent />
+
+        <!-- 底部版权说明 -->
+        <GlobalFooter />
+        <!-- 判断页面中有无 footerBar 组件，给页面底部添加一个空的 div，防止 Footer 组件被遮挡 -->
+        <div v-if="app.hasFooterBar" class="h-16"></div>
+      </div>
     </Layout>
   </div>
 </template>

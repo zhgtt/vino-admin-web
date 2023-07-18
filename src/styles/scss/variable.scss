@@ -1,4 +1,9 @@
 /** 全局的变量或方法 **/
+
+// 全局 hover 样式
 @mixin global-hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 6px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
 }

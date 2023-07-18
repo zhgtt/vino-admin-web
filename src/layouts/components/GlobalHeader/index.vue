@@ -4,8 +4,9 @@
  */
 import { computed } from 'vue';
 
-import { BoardAlert, Logo, NavMenu, UserAvatar } from '@/layouts/components';
+import { GlobalNavMenu } from '@/layouts/components';
 import { useAppStore } from '@/store';
+import { AppsMenu, BoardAlert, Logo, UserAvatar } from './components';
 
 const app = useAppStore();
 
@@ -24,10 +25,12 @@ const headerStyle = computed(() => {
     <!-- 顶部导航栏 -->
     <div class="relative w-full h-full bg-transparent" :style="{ height: '56px', lineHeight: '56px' }">
       <div :class="['vino-header-main', 'flex h-full']">
+        <!-- apps menu -->
+        <AppsMenu />
         <!-- logo -->
         <Logo />
         <!-- 菜单 -->
-        <NavMenu menu-mode="header" />
+        <GlobalNavMenu menu-mode="header" />
         <!-- TODO 右侧操作区域 -->
         <!-- TODO 用户头像 -->
         <UserAvatar />

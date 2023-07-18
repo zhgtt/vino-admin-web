@@ -7,7 +7,7 @@ import { LayoutSider } from 'ant-design-vue';
 import { computed, ref, watch } from 'vue';
 
 import { SvgIcon } from '@/components';
-import { NavMenu } from '@/layouts/components';
+import { GlobalNavMenu } from '@/layouts/components';
 import { layout } from '@/settings';
 import { useAppStore } from '@/store';
 
@@ -54,7 +54,7 @@ watch(collapsed, (newVal) => {
     :style="siderStyle"
   >
     <!-- 菜单 -->
-    <NavMenu menu-mode="side" />
+    <GlobalNavMenu menu-mode="side" />
     <!-- TODO 侧边栏操作区域内容 -->
     <!-- TODO 用户头像 -->
     <!-- 侧栏收起/展开的按钮 -->

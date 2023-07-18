@@ -29,6 +29,8 @@ declare namespace AuthRoute {
     title: string;
     /** 路由的动态路径（仅适用于需要动态路由的页面） */
     dynamicPath?: string;
+    /** 作为单级路由的父级路由组件（通常用于单级路由也需要页面布局） */
+    singleLayout?: Extract<RouteComponentType, 'basic' | 'blank'>;
     /** 是否需要登录权限 */
     requiresAuth?: boolean;
     /** 是否为缓存页面 */
@@ -38,10 +40,6 @@ declare namespace AuthRoute {
      * 本地图标为 src/assets/svg-icon 文件夹中的 svg 文件名
      */
     icon?: string | import('@/components/SvgIcon/index.vue').Props;
-    /** 外链链接 */
-    href?: string;
-    /** 路由排序顺序，用于菜单的排序 */
-    order?: number;
     /**
      * 哪些类型的用户有权限才能访问的路由（空的话则表示不需要权限）
      * @description 后端动态路由数据不需要该属性，直接由后端根据用户角色返回对应权限的路由数据
@@ -49,10 +47,12 @@ declare namespace AuthRoute {
     permission?: [];
     /** 是否隐藏该路由对应的菜单，也就是不转换为菜单，通常用于详情页面，为 true 表示隐藏 */
     hide?: boolean;
+    /** 外链链接 */
+    href?: string;
+    /** 路由排序顺序，用于菜单的排序 */
+    order?: number;
     /** 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况) */
     activeMenu?: string;
-    /** 作为单级路由的父级路由组件（通常用于单级路由也需要页面布局） */
-    singleLayout?: Extract<RouteComponentType, 'basic' | 'blank'>;
     /** TODO 菜单后缀的标签，给菜单醒目的提示 */
     /** TODO 菜单后缀的角标，用于展示数字 */
     /** 表示是否是多级路由的中间级路由，也就是菜单中负责展开/收起的父级菜单（用于转换路由数据时筛选多级路由的标识，将其设置为 false 时，表示菜单不可展开/收起）*/

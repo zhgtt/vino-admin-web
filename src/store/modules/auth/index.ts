@@ -3,8 +3,10 @@
  */
 import { notification } from 'ant-design-vue';
 import { defineStore } from 'pinia';
+import { nextTick, unref } from 'vue';
 
 import { useRouterPush } from '@/hooks';
+import { router } from '@/router';
 import { useRouteStore } from '@/store';
 import { getToken, getUserInfo } from './helpers';
 
@@ -76,7 +78,21 @@ export const useAuthStore = defineStore('auth-store', {
      * 重置 auth 状态
      */
     resetAuthStore() {
+      const { toLogin } = useRouterPush(false);
+      const routeStore = useRouteStore();
+
+      const route = unref(router.currentRoute); // 将当前 router 对象的响应式对象转换成普通对象
+      console.log('route: ', route);
+
       this.$reset(); // 重置状态
+
+      // if (route.meta?.requiresAuth) {
+      toLogin();
+      // }
+
+      nextTick(() => {
+        routeStore.resetRouteStore();
+      });
     },
 
     /**

@@ -36,9 +36,29 @@ export const useRouteStore = defineStore('route-store', {
   // NOTE actions 中支持 同步 / 异步 对状态进行操作
   actions: {
     /** 重置路由的 store */
+    resetRouteStore() {
+      this.resetRoutes();
+      this.$reset();
+    },
+
     /** 重置路由数据，保留固定路由 */
+    resetRoutes() {
+      const routes = router.getRoutes(); // 获取所有路由
+      routes.forEach((route) => {
+        const name = route.name || 'root';
+        // if (!this.) {
+        // router.removeRoute(name);
+        // }
+      });
+    },
+
     /** 是否为固定路由 */
+    isConstantRoute(name: string) {
+      //   const constantRouteNames =
+    },
+
     /** 是否为有效的固定路由 */
+    isValidConstantRoute(name: string) {},
 
     /**
      * NOTE 处理权限路由，将处理后的路由 转换成菜单、添加到 router 中

@@ -1,18 +1,15 @@
 <script lang="tsx" setup>
+/**
+ * Apps menu 外链
+ */
 import { Popover } from 'ant-design-vue';
-import type { CSSProperties } from 'vue';
+import { isEmpty } from 'lodash';
 import { PropType, defineComponent, ref } from 'vue';
 
 import { SvgIcon } from '@/components';
 import { layout } from '@/settings';
 
 const { appList = [] } = layout;
-
-interface Props {
-  style?: CSSProperties;
-}
-
-const { style } = defineProps<Props>();
 
 const actived = ref<boolean>(false);
 
@@ -56,9 +53,8 @@ const AppItemRender = defineComponent({
       :class="[
         'apps-icon',
         actived && 'apps-icon-actived',
-        'inline-flex items-center justify-center cursor-pointer rounded-md',
+        'cursor-pointer rounded-md text-center self-center flex justify-center items-center',
       ]"
-      :style="style"
     >
       <SvgIcon icon="apps-menu" type="local" />
     </div>
@@ -68,7 +64,7 @@ const AppItemRender = defineComponent({
         <ul class="app-content">
           <template v-for="(app, index) in appList">
             <!-- 分组 -->
-            <div v-if="app.children && app.children.length" :key="index" class="app-group mb-4">
+            <div v-if="!isEmpty(app.children)" :key="index" class="app-group mb-4">
               <div class="app-group-title font-semibold">{{ app.title }}</div>
               <ul>
                 <AppItemRender v-for="(item, i) in app.children" :key="i" :app-item="item" />
@@ -90,14 +86,14 @@ const AppItemRender = defineComponent({
 }
 
 .apps-icon {
+  margin-inline: -6px 8px;
   padding-inline: 4px;
   padding-block: 0;
   font-size: 14px;
-  height: 28px;
   width: 28px;
+  height: 28px;
   color: var(--nav-menu-color);
   transition: all 0.3s;
-  transition: font-size 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .apps-icon:hover,

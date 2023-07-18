@@ -23,7 +23,7 @@ const { footer } = layout;
   animation-duration: 0.3s;
   animation-timing-function: ease;
   padding-inline: 40px;
-  padding-block-end: 16px;
+  padding-block-end: 24px;
   line-height: 1.3;
 }
 

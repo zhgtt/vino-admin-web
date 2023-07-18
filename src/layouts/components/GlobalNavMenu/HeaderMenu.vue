@@ -12,7 +12,7 @@ import { useRouterPush } from '@/hooks';
 import { layout } from '@/settings';
 import { useRouteStore } from '@/store';
 import { _findTreeNodePath } from '@/utils';
-import MenuItem from './MenuItem.vue';
+import MenuItem from './components/MenuItem.vue';
 
 const { mode, menu } = layout;
 

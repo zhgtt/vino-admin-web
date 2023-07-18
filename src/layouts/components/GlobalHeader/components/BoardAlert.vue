@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+/**
+ * 顶部告示栏
+ */
 import { Alert } from 'ant-design-vue';
 
 import { system } from '@/settings';

@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@alova/mock": "^1.4.1",
+    "@types/lodash": "^4.14.195",
     "@types/node": "^20.1.5",
     "@types/nprogress": "^0.2.0",
     "@types/p5": "^1.6.2",
